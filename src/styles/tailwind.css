@@ -1,0 +1,23 @@
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.menu a:not(:last-child) {
+  @apply mr-4;
+}
+
+.menu a {
+  @apply border border-red-500;
+}
+
+.menu-link {
+  @apply p-3 rounded;
+}
+
+.menu-link:hover {
+  color: white;
+  background: rgb(244,120,60);
+  background: linear-gradient(270deg, rgba(244,120,60,1) 0%, rgba(228,28,83,1) 100%);    
+}

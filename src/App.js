@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { Switch, Route, Redirect, useLocation, useParams } from 'react-router-dom'
 
-function App() {
+import Layout from './components/Layout'
+import General from './components/steps/General'
+import Final from './components/steps/Final'
+import Intro from './components/steps/Intro'
+import Ingredients from './components/steps/Ingredients'
+
+const steps = [Intro, General, Ingredients, Final]
+
+function StepController (props) {
+  const { step } = useParams()
+  const Step = steps[Number(step) - 1]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Step />
     </div>
-  );
+  )
 }
 
-export default App;
+function App() {
+  const location = useLocation()  
+
+  return (
+    <Layout>
+      <AnimatePresence>
+        <Switch location={location} key={location.pathname}>
+          <Route path='/' exact>
+            <Redirect from='/' to='/step/1' />
+          </Route>
+          <Route path='/step/:step'> 
+            <StepController />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </Layout>
+  )
+}
+
+export default App
