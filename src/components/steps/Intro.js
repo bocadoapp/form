@@ -1,7 +1,7 @@
 import React from 'react'
 import{ FormattedMessage } from 'react-intl'
 
-import { Button } from 'ui'
+import { Button } from '@bocado/ui'
 
 import withStep from '../../hoc/withStep'
 

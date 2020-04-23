@@ -20,8 +20,7 @@
     "react-dropzone": "^10.2.2",
     "react-intl": "^4.4.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "ui": "file:../ui/dist"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "run-p watch:css start:react",
