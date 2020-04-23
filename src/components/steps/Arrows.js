@@ -1,24 +1,27 @@
 import React, { useCallback } from 'react'
 import cn from 'classnames'
-import { useParams, useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
-import { useStore } from '../hooks/useStore'
+import { useStore } from '../../hooks/useStore'
+// import { createPortal } from 'react-dom'
 
 const Arrow = ({ className, type }) => {
   const history = useHistory()
-  const { step } = useParams()
+  const { step, setStep } = useStore()
   
   const handleOnclick = useCallback(() => {
     const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1
+    setStep(nextStep)
     history.push(`/step/${nextStep}`)
   }, [step, type, history])
   
   return (
     <div
-    onClick={handleOnclick}
+      onClick={handleOnclick}
+      style={{ top: '50%' }}
       className={cn(
         className,
-        'absolute top-50 text-5xl p-5 text-gray-600 cursor-pointer',
+        'absolute text-5xl p-5 text-gray-600 cursor-pointer',
         type === 'prev' ? 'left-0' : 'right-0'
       )}
     >
@@ -28,8 +31,7 @@ const Arrow = ({ className, type }) => {
 }
 
 const Arrows = () => {
-  const { numSteps } = useStore()
-  const { step } = useParams()
+  const { step, numSteps } = useStore()  
 
   return (
     <>

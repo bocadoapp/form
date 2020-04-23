@@ -1,5 +1,5 @@
 import React from 'react'
-import withStep from './withStep'
+import withStep from '../../hoc/withStep'
 
 const Final = () => {
   return (

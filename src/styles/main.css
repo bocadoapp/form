@@ -10914,13 +10914,15 @@ video {
   transition-duration: 1000ms;
 }
 
+html {
+  height: 100%;
+}
+
 .menu a:not(:last-child) {
   margin-right: 1rem;
 }
 
 .menu a {
-  border-width: 1px;
-  border-color: #f56565;
 }
 
 .menu-link {
@@ -10932,6 +10934,24 @@ video {
   color: white;
   background: rgb(244,120,60);
   background: linear-gradient(270deg, rgba(244,120,60,1) 0%, rgba(228,28,83,1) 100%);
+}
+
+.wrapper {
+  height: 100%;
+}
+
+#arrow-prev, #arrow-next {
+  position: absolute;
+  display: inline-flex;
+  top: 50%;
+}
+
+#arrow-prev {
+  left: 0;
+}
+
+#arrow-next {
+  right: 0;
 }
 
 @media (min-width: 640px){

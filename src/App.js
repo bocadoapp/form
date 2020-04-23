@@ -8,30 +8,33 @@ import Final from './components/steps/Final'
 import Intro from './components/steps/Intro'
 import Ingredients from './components/steps/Ingredients'
 
-const steps = [Intro, General, Ingredients, Final]
-
-function StepController (props) {
-  const { step } = useParams()
-  const Step = steps[Number(step) - 1]
-  return (
-    <div>
-      <Step />
-    </div>
-  )
-}
-
 function App() {
-  const location = useLocation()  
+  const location = useLocation()    
 
   return (
     <Layout>
       <AnimatePresence>
         <Switch location={location} key={location.pathname}>
-          <Route path='/' exact>
-            <Redirect from='/' to='/step/1' />
+        <Route path='/' exact>
+            <Redirect from='/' to='/ca/step/1' />
+          </Route>          
+          <Route path='/ca' exact>
+            <Redirect from='/' to='/ca/step/1' />
           </Route>
-          <Route path='/step/:step'> 
-            <StepController />
+          <Route path='/es' exact>
+            <Redirect from='/' to='/es/step/1' />
+          </Route>          
+          <Route path='/:lang/step/1'> 
+            <Intro />
+          </Route>
+          <Route path='/:lang/step/2'> 
+            <General />
+          </Route>
+          <Route path='/:lang/step/3'> 
+            <Ingredients />
+          </Route>
+          <Route path='/:lang/step/4'> 
+            <Final />
           </Route>
         </Switch>
       </AnimatePresence>

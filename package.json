@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.43",
+    "@bocado/ui": "file:../ui/dist",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.1.4",
     "apollo-upload-client": "^13.0.0",
     "classnames": "^2.2.6",
     "formik": "^2.1.4",
@@ -18,7 +20,8 @@
     "react-dropzone": "^10.2.2",
     "react-intl": "^4.4.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "ui": "file:../ui/dist"
   },
   "scripts": {
     "start": "run-p watch:css start:react",

@@ -1,7 +1,7 @@
 import React from 'react'
 // import { FieldArray } from 'formik'
 
-import withStep from './withStep'
+import withStep from '../../hoc/withStep'
 
 // function Ingredient () {
 //   return (

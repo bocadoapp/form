@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'formik'
 
-import withStep from './withStep'
+import withStep from '../../hoc/withStep'
 
 const User = () => {
   return (

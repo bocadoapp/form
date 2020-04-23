@@ -2,8 +2,18 @@ import React, { useContext, createContext, useReducer } from 'react'
 
 const Context = createContext()
 
+const initialStep = () => {
+  const step = Number(window.location.pathname.split('/')[1])
+
+  if(!isNaN(step)) {    
+    return step
+  }
+
+  return 1
+}
+
 const initialState = {
-  step: 1,
+  step: initialStep(),
   numSteps: 4
 }
 

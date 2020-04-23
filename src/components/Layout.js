@@ -4,11 +4,13 @@ import Form from './Form'
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className='flex flex-col h-screen min-h-full'>
       <Header />
-      <Form>
-        {children}
-      </Form>
+      <div className='wrapper'>
+        <Form>
+          {children}
+        </Form>
+      </div>
     </div>
   )
 }

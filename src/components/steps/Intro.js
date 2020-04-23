@@ -1,6 +1,9 @@
 import React from 'react'
+import{ FormattedMessage } from 'react-intl'
 
-import withStep from './withStep'
+import { Button } from 'ui'
+
+import withStep from '../../hoc/withStep'
 
 // const GET_FILE = gql`
 //   query getFile ($name: String!) {
@@ -12,10 +15,11 @@ import withStep from './withStep'
 //   }
 // `
 
-const Intro = () => {
+const Intro = () => {  
   return (
     <div>
-      intro
+      <FormattedMessage id='intro' values={{ pa: str => <p>{str}</p> }} />
+      <Button loading />
     </div>
   )
 }

@@ -4,12 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  height: 100%;
+}
+
 .menu a:not(:last-child) {
   @apply mr-4;
 }
 
 .menu a {
-  @apply border border-red-500;
+  @apply ;
 }
 
 .menu-link {
@@ -20,4 +24,21 @@
   color: white;
   background: rgb(244,120,60);
   background: linear-gradient(270deg, rgba(244,120,60,1) 0%, rgba(228,28,83,1) 100%);    
+}
+
+.wrapper {
+  @apply h-full;
+}
+
+#arrow-prev, #arrow-next {
+  @apply absolute inline-flex;
+  top: 50%;
+}
+
+#arrow-prev {
+  @apply left-0;
+}
+
+#arrow-next {
+  @apply right-0;
 }
