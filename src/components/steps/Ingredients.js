@@ -42,7 +42,7 @@ function AddIngredient ({ toggle, push }) {
           <input type="text" className='p-3 border-0' placeholder='Ingredient' ref={refs.name} />
         </div>
       </div>
-      <Button className='w-full' style='success' onClick={handleClick}>
+      <Button className='w-full' styled='success' onClick={handleClick}>
         Afegir
       </Button>      
     </div>
