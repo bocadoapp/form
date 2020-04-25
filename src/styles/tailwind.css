@@ -8,6 +8,34 @@ html {
   height: 100%;
 }
 
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('./fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('./fonts/Comfortaa/Comfortaa-Bold.ttf') format('truetype');
+}
+
+.bocado {
+  font-family: 'Comfortaa';
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Fira Sans';
+  @apply text-gray-800;
+}
+
+p {
+  @apply my-5;
+}
+
+input, button {
+  @apply p-2 border border-gray-300 rounded w-full;
+}
+
 .menu a:not(:last-child) {
   @apply mr-4;
 }

@@ -10918,6 +10918,41 @@ html {
   height: 100%;
 }
 
+@font-face {
+  font-family: 'Fira Sans';
+
+  src: url('./fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+
+  src: url('./fonts/Comfortaa/Comfortaa-Bold.ttf') format('truetype');
+}
+
+.bocado {
+  font-family: 'Comfortaa';
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Fira Sans';
+  color: #2d3748;
+}
+
+p {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+input, button {
+  padding: 0.5rem;
+  border-width: 1px;
+  border-color: #e2e8f0;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
 .menu a:not(:last-child) {
   margin-right: 1rem;
 }

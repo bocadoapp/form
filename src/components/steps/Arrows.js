@@ -1,19 +1,18 @@
 import React, { useCallback } from 'react'
 import cn from 'classnames'
-import { useHistory, useParams } from 'react-router-dom'
-
+import { useHistory } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { useStore } from '../../hooks/useStore'
-// import { createPortal } from 'react-dom'
 
 const Arrow = ({ className, type }) => {
   const history = useHistory()
   const { step, setStep } = useStore()
-  
+  const { locale } =  useIntl()
   const handleOnclick = useCallback(() => {
-    const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1
+    const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1    
     setStep(nextStep)
-    history.push(`/step/${nextStep}`)
-  }, [step, type, history])
+    history.push(`/${locale}/step/${nextStep}`)
+  }, [step, type, history, locale])
   
   return (
     <div

@@ -1,5 +1,5 @@
 import React from 'react'
-import withStep from '../../hoc/withStep'
+import withAnimation from '../../hoc/withAnimation'
 
 const Final = () => {
   return (
@@ -11,4 +11,4 @@ const Final = () => {
   )
 }
 
-export default withStep(Final)
+export default withAnimation(Final)

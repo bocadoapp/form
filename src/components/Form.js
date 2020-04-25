@@ -6,7 +6,7 @@ const initialValues = {
     name: '',
     email: ''
   },
-  name: '',
+  name: 'test',
   diners: '',
   time: '',
   cooking_time: '',

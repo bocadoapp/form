@@ -13,9 +13,9 @@ function App() {
 
   return (
     <Layout>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
-        <Route path='/' exact>
+          <Route path='/' exact>
             <Redirect from='/' to='/ca/step/1' />
           </Route>          
           <Route path='/ca' exact>
@@ -24,16 +24,16 @@ function App() {
           <Route path='/es' exact>
             <Redirect from='/' to='/es/step/1' />
           </Route>          
-          <Route path='/:lang/step/1'> 
+          <Route path='/:lang/step/1' exact> 
             <Intro />
           </Route>
-          <Route path='/:lang/step/2'> 
+          <Route path='/:lang/step/2' exact> 
             <General />
           </Route>
-          <Route path='/:lang/step/3'> 
+          <Route path='/:lang/step/3' exact> 
             <Ingredients />
           </Route>
-          <Route path='/:lang/step/4'> 
+          <Route path='/:lang/step/4' exact> 
             <Final />
           </Route>
         </Switch>
