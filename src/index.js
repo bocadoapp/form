@@ -25,7 +25,7 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <IntlProvider locale={locale} messages={messages[locale]}>
         <Provider>
-          <Router>
+          <Router basename={process.env.PUBLIC_URL}>
             <App />
           </Router>
         </Provider>      
