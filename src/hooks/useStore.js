@@ -3,13 +3,8 @@ import React, { useContext, createContext, useReducer } from 'react'
 const Context = createContext()
 
 const initialStep = () => {
-  const step = Number(window.location.pathname.split('/')[1])
-
-  if(!isNaN(step)) {    
-    return step
-  }
-
-  return 1
+  const step = Number(window.location.hash.split('/').find(e => !isNaN(Number(e))))
+  return step || 1
 }
 
 const initialState = {
