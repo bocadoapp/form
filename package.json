@@ -2,7 +2,7 @@
   "name": "form",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://form.bocadoapp.com",
+  "homepage": "http://form.bocadoapp.com",
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.43",
     "@bocado/ui": "0.0.41",
