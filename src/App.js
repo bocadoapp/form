@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import General from './components/steps/General'
@@ -15,7 +15,7 @@ function App() {
     <Layout>
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
-          <Route path='/' exact>
+          {/* <Route path='/' exact>
             <Redirect from='/' to='/ca/step/1' />
           </Route>          
           <Route path='/ca' exact>
@@ -23,7 +23,7 @@ function App() {
           </Route>
           <Route path='/es' exact>
             <Redirect from='/' to='/es/step/1' />
-          </Route>          
+          </Route>           */}
           <Route path='/:lang/step/1' exact> 
             <Intro />
           </Route>
