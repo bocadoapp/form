@@ -24,13 +24,13 @@ const Intro = () => {
     e.preventDefault()
     setStep(2)
     history.push(`/${locale}/step/2`)
-  }, [history, locale])
+  }, [history, locale, setStep])
   return (
     <div>
       <div className='flex justify-center items-center'>
         <div className='flex flex-col w-1/2 mr-5'>
           <h1 className='text-4xl'>
-            <span role='image' aria-label='hola'>
+            <span role='img' aria-label='hello'>
               👋
             </span>
           </h1>

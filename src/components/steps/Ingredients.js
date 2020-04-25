@@ -21,7 +21,7 @@ function AddIngredient ({ toggle, push }) {
     }
     push(ingredient)
     toggle(false)
-  }, [])
+  }, [push, toggle, refs.name, refs.unit, refs.qty])
 
   return (
     <div className='flex flex-col w-full'>

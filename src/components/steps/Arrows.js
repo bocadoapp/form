@@ -12,7 +12,7 @@ const Arrow = ({ className, type }) => {
     const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1    
     setStep(nextStep)
     history.push(`/${locale}/step/${nextStep}`)
-  }, [step, type, history, locale])
+  }, [step, type, history, locale, setStep])
   
   return (
     <div

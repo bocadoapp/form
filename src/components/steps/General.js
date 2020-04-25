@@ -15,7 +15,7 @@ const User = () => {
     e.preventDefault()
     setStep(3)
     history.push(`/${locale}/step/3`)
-  }, [history, locale])
+  }, [history, locale, setStep])
 
   return (
     <div className='w-full text-gray-600'>

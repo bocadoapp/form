@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { Switch, Route, Redirect, useLocation, useParams } from 'react-router-dom'
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import General from './components/steps/General'
