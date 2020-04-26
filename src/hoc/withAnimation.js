@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import Arrows from '../components/steps/Arrows'
 
-const withAnimation = Component => props => (
+const withAnimation = ({ arrows = false } = {}) => Component => props => (
   <motion.div
     exit={{ opacity: 0 }}
     initial={{ opacity: 0 }}
@@ -11,7 +11,7 @@ const withAnimation = Component => props => (
     className='flex w-full md:max-w-screen-md lg:max-w-screen-md m-auto leading-relaxed'
   >
     <Component {...props} />
-    <Arrows />
+    {arrows && <Arrows />}
   </motion.div>
 )
 

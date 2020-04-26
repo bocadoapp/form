@@ -15,7 +15,7 @@ function AddStep ({ toggle, push }) {
     }
     push(step)
     toggle(false)
-  }, [push, toggle])
+  }, [push, toggle, refs.text])
 
   return (
     <div className='flex flex-col w-full'>
@@ -75,4 +75,4 @@ const Steps = () => {
   )
 }
 
-export default withAnimation(Steps)
+export default withAnimation()(Steps)

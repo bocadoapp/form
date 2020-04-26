@@ -14,7 +14,7 @@ const User = () => {
   const handleOnclick = useCallback(e => {
     e.preventDefault()
     setStep(3)
-    history.push(`/${locale}/step/3`)
+    history.push(`/${locale}/3`)
   }, [history, locale, setStep])
 
   return (
@@ -63,4 +63,4 @@ const User = () => {
   )
 }
 
-export default withAnimation(User)
+export default withAnimation()(User)

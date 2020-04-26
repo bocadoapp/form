@@ -93,4 +93,4 @@ const Ingredients = () => {
   )
 }
 
-export default withAnimation(Ingredients)
+export default withAnimation()(Ingredients)

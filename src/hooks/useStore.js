@@ -3,7 +3,7 @@ import React, { useContext, createContext, useReducer } from 'react'
 const Context = createContext()
 
 const initialStep = () => {
-  const step = Number(window.location.hash.split('/').find(e => !isNaN(Number(e))))
+  const step = Number(window.location.hash.split('/').find(e => !isNaN(Number(e))))  
   return step || 1
 }
 

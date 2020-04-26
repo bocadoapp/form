@@ -11,7 +11,7 @@ const Arrow = ({ className, type }) => {
   const handleOnclick = useCallback(() => {
     const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1    
     setStep(nextStep)
-    history.push(`/${locale}/step/${nextStep}`)
+    history.push(`/${locale}/${nextStep}`)
   }, [step, type, history, locale, setStep])
   
   return (

@@ -23,8 +23,9 @@ const Intro = () => {
   const handleOnclick = useCallback(e => {
     e.preventDefault()
     setStep(2)
-    history.push(`/${locale}/step/2`)
+    history.push(`/${locale}/2`)
   }, [history, locale, setStep])
+  
   return (
     <div>
       <div className='flex flex-col md:flex-row justify-center items-center'>
@@ -66,4 +67,4 @@ const Intro = () => {
   )
 }
 
-export default withAnimation(Intro)
+export default withAnimation()(Intro)

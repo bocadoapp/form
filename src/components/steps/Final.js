@@ -11,4 +11,4 @@ const Final = () => {
   )
 }
 
-export default withAnimation(Final)
+export default withAnimation()(Final)
