@@ -9,9 +9,7 @@ const Arrow = ({ className, type }) => {
   const { step, setStep } = useStore()
   const { locale } =  useIntl()
   const handleOnclick = useCallback(() => {
-    const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1
-    console.log('sss', step, nextStep);
-    
+    const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1    
     setStep(nextStep)
     history.push(`/${locale}/step/${nextStep}`)
   }, [step, type, history, locale, setStep])
@@ -36,8 +34,8 @@ const Arrows = () => {
 
   return (
     <>
-      {Number(step) > 1 && <Arrow type='prev' />}
-      {Number(step) < numSteps && <Arrow type='next' />}
+      {step > 1 && <Arrow type='prev' />}
+      {step < numSteps && <Arrow type='next' />}
     </>
   )
 }

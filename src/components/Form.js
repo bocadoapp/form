@@ -12,6 +12,7 @@ const initialValues = {
   cooking_time: '',
   cuisine: '',
   ingredients: [],
+  steps: [],
   pics: [],
   videos: [],
   picsPerStep: []

@@ -13,12 +13,14 @@ function AddIngredient ({ toggle, push }) {
   }
 
   const handleClick = useCallback(e => {
-    e.preventDefault && e.preventDefault()
+    // e.preventDefault && e.preventDefault()
     const ingredient = {
       qty: refs.qty.current.value,
       unit: refs.unit.current.selectedOptions[0].value,
       name: refs.name.current.value
     }
+    console.log('hola?', ingredient);
+    
     push(ingredient)
     toggle(false)
   }, [push, toggle, refs.name, refs.unit, refs.qty])
@@ -28,7 +30,7 @@ function AddIngredient ({ toggle, push }) {
       <div className='w-full flex border border-gray-300 rounded text-gray-600 my-4'>
         <div className='w-32 flex items-center border-r border-gray-300'>
           {/* <i className="fas fa-balance-scale-right" /> */}
-          <input ref={refs.qty} type="text" className='p-3 w-full border-0' placeholder='Quantitat' />
+          <input ref={refs.qty} type="number" className='p-3 w-full border-0' placeholder='Quantitat' />
         </div>
         <div className='w-24 flex items-center border-r border-gray-300'>
           <select className='h-full w-full' ref={refs.unit}>
@@ -42,7 +44,7 @@ function AddIngredient ({ toggle, push }) {
           <input type="text" className='p-3 border-0' placeholder='Ingredient' ref={refs.name} />
         </div>
       </div>
-      <Button className='w-full' styled='success' onClick={handleClick}>
+      <Button type='button' className='w-full' styled='success' onClick={handleClick}>
         Afegir
       </Button>      
     </div>
@@ -68,7 +70,7 @@ const Ingredients = () => {
                 >
                   Nou ingredient
                 </button>                
-                <Button className='ml-2'>
+                <Button className='ml-2' disabled={values.ingredients.length === 0}>
                   Fet!
                 </Button>
               </div>

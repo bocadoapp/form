@@ -27,8 +27,8 @@ const Intro = () => {
   }, [history, locale, setStep])
   return (
     <div>
-      <div className='flex justify-center items-center'>
-        <div className='flex flex-col w-1/2 mr-5'>
+      <div className='flex flex-col md:flex-row justify-center items-center'>
+        <div className='flex flex-col w-full md:w-1/2 md:mr-5 px-8 md:px-0'>
           <h1 className='text-4xl'>
             <span role='img' aria-label='hello'>
               👋
@@ -44,7 +44,7 @@ const Intro = () => {
             <FormattedMessage id='intro3' />
           </p>      
         </div>
-        <div className='flex flex-col w-1/2 ml-5'>
+        <div className='flex flex-col w-full md:w-1/2 md:ml-5 px-8 md:px-0'>
           <div className='flex flex-col justify-center bg-gray-100 p-3 rounded-lg shadow-xl'>
             <div className='mb-3'>
               <input type="text" placeholder='Nom i cognoms'/>
