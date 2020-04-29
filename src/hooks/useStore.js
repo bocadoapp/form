@@ -9,13 +9,16 @@ const initialStep = () => {
 
 const initialState = {
   step: initialStep(),
-  numSteps: 4
+  numSteps: 4,
+  user: null
 }
 
 function reducer (state = initialState, action) {
   switch (action.type) {
     case 'SET_STEP':
       return {...state, step: action.step}
+    case 'SET_USER':
+      return { ...state, user: action.user } 
     default:
       return {...state}
   }
@@ -32,5 +35,6 @@ export function Provider ({ children }) {
 export function useStore () {
   const [state, dispatch] = useContext(Context)
   const setStep = step => dispatch({ type: 'SET_STEP', step })
-  return {...state, setStep}
+  const setUser = user => dispatch({ type: 'SET_USER', user })
+  return {...state, setStep, setUser }
 }

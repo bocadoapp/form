@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useQuery, gql } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 import{ FormattedMessage, useIntl } from 'react-intl'
 import { Button } from '@bocado/ui'
@@ -16,16 +17,57 @@ import withAnimation from '../../hoc/withAnimation'
 //   }
 // `
 
+const LS_KEY = 'bocado_user'
+const GET_USER_FROM_TOKEN = gql`
+  query getUserById ($token: String!) {
+    userById(filter: { accessToken: $token }) {
+      name,
+      mail,
+      accessToken
+    }
+  }
+`
+
 const Intro = () => {
+  const [token, setToken] = useState(null)
   const history = useHistory()
-  const { setStep } = useStore()
+  const { user, setUser, setStep } = useStore()
   const { locale } = useIntl()
-  const handleOnclick = useCallback(e => {
-    e.preventDefault()
+  const { loading, data } = useQuery(GET_USER_FROM_TOKEN, { skip: token === null, variables: { token }})
+  const handleOnlogin = provider => {
+    const url = `${process.env.REACT_APP_API}/auth/${provider}`
+    window.location.href = url
+  }
+  const saveAndGoToStep2 = useCallback(user => {
+    if (user) {
+      setUser(user)
+    }
     setStep(2)
     history.push(`/${locale}/2`)
-  }, [history, locale, setStep])
-  
+  }, [history, setStep, setUser, locale])
+
+  useEffect(() => {
+    if (!user && !loading && data) {
+      localStorage.setItem(LS_KEY, JSON.stringify(data.userById))
+      saveAndGoToStep2(data.userById)
+    }
+  }, [loading, data, saveAndGoToStep2, user])
+
+  useEffect(() => {
+    if (!user) {
+      const token = new URLSearchParams(history.location.search).get('token')
+      if (token) {
+        setToken(token)
+      }
+    }
+  }, [history.location.search, user])
+
+  useEffect(() => {
+    if (user) {
+      saveAndGoToStep2()
+    }
+  }, [user, saveAndGoToStep2])
+
   return (
     <div>
       <div className='flex flex-col md:flex-row justify-center items-center'>
@@ -56,11 +98,23 @@ const Intro = () => {
             <button className='border bg-gray-300 text-gray-500'>
               Registrar-me!
             </button>
-          </div>            
-          <Button handleOnclick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
-            <i className="fab fa-instagram mr-3" />
-            Registrar-me amb Instagram
-          </Button>             
+          </div>
+
+          <div className='flex'>
+            <Button
+              loading={loading}
+              onClick={() => handleOnlogin('facebook')}
+              className='mt-8 items-center text-gray-100 bg-blue-700 rounded-full'
+              size='sm'
+            >
+              <i className="fab fa-facebook mr-3" />
+              Registrar-me amb Facebook
+            </Button>
+            {/* <Button onClick={() => handleOnlogin('instagram')} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
+              <i className="fab fa-instagram mr-3" />
+              Registrar-me amb Instagram
+            </Button> */}
+          </div>
         </div>             
       </div>
     </div>

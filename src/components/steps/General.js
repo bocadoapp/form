@@ -10,12 +10,15 @@ import{ useIntl } from 'react-intl'
 const User = () => {
   const history = useHistory()
   const { locale } = useIntl()
-  const { setStep } = useStore()
+  const { user, setStep } = useStore()
   const handleOnclick = useCallback(e => {
     e.preventDefault()
     setStep(3)
     history.push(`/${locale}/3`)
   }, [history, locale, setStep])
+
+  console.log('user', user);
+  
 
   return (
     <div className='w-full text-gray-600'>

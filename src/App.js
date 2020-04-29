@@ -14,7 +14,7 @@ function App() {
 
   return (
     <Layout>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
           <Route path='/' exact>
             <Redirect from='/' to='/ca/1' />

@@ -15,8 +15,8 @@ const locale = getLang()
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: createUploadLink({
-    // uri: 'http://localhost:4000/graphql',
-    uri: 'https://bocado-api.herokuapp.com/graphql'
+    uri: `${process.env.REACT_APP_API}/graphql`,
+    // uri: 'https://bocado-api.herokuapp.com/graphql'
   })
 })
 
