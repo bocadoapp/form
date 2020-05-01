@@ -1,0 +1,11 @@
+.step-general .pic {
+  @apply inline-flex rounded-full border border-gray-300 w-12 h-12 box-border overflow-hidden;
+}
+
+.step-general .pic-inner {
+  @apply flex min-w-0;  
+}
+
+.step-general .pic-inner img {
+  @apply block w-auto h-full;  
+}

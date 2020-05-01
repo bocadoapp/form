@@ -4,8 +4,6 @@ import { useIntl } from 'react-intl'
 import { useQuery, gql } from '@apollo/client'
 import cn from 'classnames'
 
-const itemToString = item => item
-
 const GET_INGREDIENTS = gql`
   query getIngredients ($locale: String!, $value: String!) {
     ingredients(filter:{ nameByRegex:[$locale, $value]}){
@@ -18,7 +16,8 @@ const GET_INGREDIENTS = gql`
   }
 `
 
-function IngredientWrapper () {
+function Wrapper (props) {
+  const { locale } = useIntl()
   const stateReducer = (state, changes) => {
     switch(changes.type) {
       case Downshift.stateChangeTypes.mouseUp: {        
@@ -31,21 +30,18 @@ function IngredientWrapper () {
         return changes
     }
   }
+
+  const itemToString = item => item && item.name[locale]
   
   return (
     <Downshift
       stateReducer={stateReducer}
-      onChange={selection =>
-        console.log(
-          selection
-            ? `You selected ${itemToString(selection)}`
-            : 'selection cleared',
-        )
-      }
+      onInputValueChange={inputValue => props.setValue(inputValue)}      
+      onChange={selection => props.setSelected({ type: 'db', value: selection._id, label: selection.name[locale] })}
       itemToString={itemToString}
     >
       {props => (
-        <IngredientInput
+        <Input
           {...props}
           {...props.getRootProps({ refKey: 'innerRef', suppressRefError : true })}
         />
@@ -54,7 +50,7 @@ function IngredientWrapper () {
   )
 }
 
-function IngredientInput ({
+function Input ({
   getLabelProps,
   getInputProps,
   getToggleButtonProps,
@@ -106,32 +102,34 @@ function IngredientInput ({
           )}
         </div>
         <div style={{position: 'relative'}}>
-          <ul
-            {...getMenuProps()}
-            className='absolute w-full z-50 bg-white rounded-b cursor-pointer overflow-y-scroll border border-gray-300 shadow-xl'
-            style={{ maxHeight: '200px' }}
-          >
-            {isOpen && data && data.ingredients && data.ingredients.length
-              ? data.ingredients.map((item, index) => (
-                  <li
-                    className='p-3 border-b border-gray-300'
-                    key={item._id}
-                    {...getItemProps({
-                      item,
-                      index,
-                      // isActive: highlightedIndex === index,
-                      // isSelected: selectedItem === item,
-                    })}
-                  >
-                    {item.name.ca}
-                  </li>
-                ))
-              : null}
-          </ul>
+          {isOpen ? (
+            <ul
+              {...getMenuProps()}
+              className='absolute w-full z-50 bg-white rounded-b cursor-pointer overflow-y-scroll border border-gray-300 shadow-xl'
+              style={{ maxHeight: '200px' }}
+            >
+              {data && data.ingredients && data.ingredients.length
+                ? data.ingredients.map((item, index) => (
+                    <li
+                      className='p-3 border-b border-gray-300'
+                      key={item._id}
+                      {...getItemProps({
+                        item,
+                        index,
+                        // isActive: highlightedIndex === index,
+                        // isSelected: selectedItem === item,
+                      })}
+                    >
+                      {item.name.ca}
+                    </li>
+                  ))
+                : null}
+            </ul>            
+          ) : null}
         </div>
       </div>
     </>
   )
 }
 
-export default IngredientWrapper
+export default Wrapper

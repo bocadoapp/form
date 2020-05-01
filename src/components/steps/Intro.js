@@ -19,11 +19,12 @@ import withAnimation from '../../hoc/withAnimation'
 
 const LS_KEY = 'bocado_user'
 const GET_USER_FROM_TOKEN = gql`
-  query getUserById ($token: String!) {
-    userById(filter: { accessToken: $token }) {
+  query getUser ($token: String!) {
+    user (filter: { accessToken: $token }) {
       name,
       mail,
-      accessToken
+      accessToken,
+      pic
     }
   }
 `
@@ -48,8 +49,8 @@ const Intro = () => {
 
   useEffect(() => {
     if (!user && !loading && data) {
-      localStorage.setItem(LS_KEY, JSON.stringify(data.userById))
-      saveAndGoToStep2(data.userById)
+      localStorage.setItem(LS_KEY, JSON.stringify(data.user))
+      saveAndGoToStep2(data.user)
     }
   }, [loading, data, saveAndGoToStep2, user])
 

@@ -9,6 +9,7 @@ import messages, { getLang } from './locale'
 import App from './App'
 import { Provider } from './hooks/useStore'
 
+import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/main.css'
 
 const locale = getLang()

@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom'
 import cn from 'classnames'
 import { useIntl } from 'react-intl'
 
+import Avatar from './Avatar'
 import { useStore } from '../hooks/useStore'
 import logo from '../images/logo.png'
 
@@ -24,8 +25,8 @@ const Navbar = () => {
       if (lsUser) {
         setUser(lsUser)
       }
-    } catch (err) {}    
-  }, [setUser])
+    } catch (err) {} // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) 
 
   return (
     <nav className='flex sticky top-0 md:flex-row justify-start items-center w-full py-3 px-6 md:px-20 lg:px-32 mb-10 md:mb-10'>
@@ -89,8 +90,8 @@ const Navbar = () => {
             </span>
           </div>                
         </div>         
-        <div className="hidden md:flex pt-4 md:max-w-xs justfy-end">
-          social
+        <div className="hidden md:flex md:max-w-xs justfy-end">
+          <Avatar />
           {/* <div className='border border-gray-300 rounded-lg overflow-hidden text-xs flex'>
             <input value={mail} className='p-3 w-full' type='email' name='EMAIL' placeholder='Tu e-mail' onChange={e => setMail(e.target.value)} />
             <button className='p-3 rounded-l-lg w-full flex justify-center' disabled={loading} onClick={handleOnSubmit}>

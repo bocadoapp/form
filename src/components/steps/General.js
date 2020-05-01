@@ -1,27 +1,48 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { Field } from 'formik'
 import { useHistory } from 'react-router-dom'
+import { useDropzone } from 'react-dropzone'
+import { useMutation, gql } from '@apollo/client'
 
 import { Button } from '@bocado/ui'
 import withAnimation from '../../hoc/withAnimation'
 import { useStore } from '../../hooks/useStore'
 import{ useIntl } from 'react-intl'
 
-const User = () => {
+const UPLOAD_FILE = gql`
+  mutation Upload($file: Upload) {
+    upload(file: $file) {
+      _id
+    }
+  }
+`
+
+const General = () => {
+  const [images, setImages] = useState([])
+  const [upload, { data }] = useMutation(UPLOAD_FILE)
   const history = useHistory()
   const { locale } = useIntl()
   const { user, setStep } = useStore()
+  const onDrop = useCallback(acceptedFiles => {
+    setImages([
+      ...images,
+      ...acceptedFiles.map(file =>({ ...file, preview: URL.createObjectURL(file) }))
+    ])
+    // upload({ variables: { file: acceptedFiles[0] } })    
+  }, [images, setImages, upload])
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
   const handleOnclick = useCallback(e => {
     e.preventDefault()
     setStep(3)
     history.push(`/${locale}/3`)
   }, [history, locale, setStep])
 
-  console.log('user', user);
-  
+  useEffect(() => () => {
+    images.forEach(file => URL.revokeObjectURL(file.preview));
+  }, [images])  
 
   return (
-    <div className='w-full text-gray-600'>
+    <div className='w-full text-gray-600 step-general'>
       {/* <div>
         <Field type='text' name='user.name' placeholder='Nom' />
         <Field type='email' name='user.email' placeholder='E-mail' />
@@ -58,12 +79,38 @@ const User = () => {
         </Field>          
       </div>
 
-      <Button handleOnclick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
+      <div className='flex items-center mb-5'>
+        <div className="w-10 mr-5 text-center">
+          <i className="far fa-images" />
+        </div>
+        <div className='flex'>
+          <div className='flex w-full items-center mr-3'>
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <button type='button' className='bg-gray-100 border border-gray-300'>
+                📸 Puja fotos!
+              </button>
+            </div>        
+          </div>
+
+          <div className="flex my-3">
+            {images.map(file => (
+              <div key={file.name || file.path} className='pic'>
+                <div className='pic-inner'>
+                  <img src={file.preview} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Button styled='gradient' handleOnclick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
         <i className="fas fa-hamburger mr-3" />
         Afegir ingredients!
-      </Button>         
+      </Button>
     </div>
   )
 }
 
-export default withAnimation()(User)
+export default withAnimation()(General)

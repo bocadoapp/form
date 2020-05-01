@@ -1,8 +1,8 @@
-@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '../components/steps/steps.css';
 
 html {
   height: 100%;
@@ -70,3 +70,7 @@ input, button {
 #arrow-next {
   @apply right-0;
 }
+
+#avatar { fill: url(#Gradient1); }
+.stop1 { stop-color: #f4783c; }
+.stop3 { stop-color: #e41c53; }

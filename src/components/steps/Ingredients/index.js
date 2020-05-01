@@ -18,6 +18,7 @@ const Ingredients = () => {
             <>
               <div className='flex'>
                 <button
+                  type='button'
                   // disabled={showAdd}
                   className='border border-gray-300 bg-gray-100 text-gray-600 mr-2'
                   onClick={handleClick}
@@ -29,11 +30,11 @@ const Ingredients = () => {
                 </Button>
               </div>
               {showAdd && <Ingredient toggle={toggleShowAdd} push={push} />}
-              {values.ingredients.map(({ name, qty, unit }, i) => {
+              {values.ingredients.map(({ label, qty, unit }, i) => {
                 return (
                   <div key={`ing-${i}`} className='flex items-center justify-between py-2 my-2 border-b border-gray-200 text-gray-500'>
                      <span>
-                      {qty}{unit} <span className='text-gray-700'>{name}</span>
+                      {qty}{unit} <span className='text-gray-700'>{label}</span>
                      </span>
                      <i className="far fa-times-circle cursor-pointer" onClick={() => remove(i)} />
                   </div>
