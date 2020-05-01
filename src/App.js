@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 
 import Layout from './components/Layout'
 import General from './components/steps/General'
@@ -8,16 +8,21 @@ import Final from './components/steps/Final'
 import Intro from './components/steps/Intro'
 import Ingredients from './components/steps/Ingredients'
 import Pasos from './components/steps/Pasos'
+import Home from './components/Home'
 
 function App() {
-  const location = useLocation()    
-
+  const history = useHistory()
+  const exitBeforeEnter = history.action === 'PUSH'
+  
   return (
     <Layout>
-      <AnimatePresence exitBeforeEnter>
-        <Switch location={location} key={location.pathname}>
+      <AnimatePresence exitBeforeEnter={exitBeforeEnter}>
+        <Switch location={history.location} key={history.location.pathname}>
           <Route path='/' exact>
-            <Redirect from='/' to='/ca/1' />
+            <Home />
+          </Route>
+          <Route path='/:lang' exact>
+            <Home />
           </Route>
           <Route path='/:lang/1' exact> 
             <Intro />

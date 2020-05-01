@@ -3,12 +3,12 @@ import { useHistory, Link } from 'react-router-dom'
 import cn from 'classnames'
 import { useIntl } from 'react-intl'
 
+import { getUserFromLS } from '../lib/helpers'
 import Avatar from './Avatar'
 import { useStore } from '../hooks/useStore'
 import logo from '../images/logo.png'
 
 const circleClassname = 'flex justify-center items-center rounded-full mx-3 w-8 h-8'
-const LS_KEY = 'bocado_user'
 
 const Navbar = () => {
   const { locale } = useIntl()
@@ -20,13 +20,11 @@ const Navbar = () => {
   }, [history, locale, setStep])
 
   useEffect(() => {
-    try {
-      const lsUser = JSON.parse(localStorage.getItem(LS_KEY))
-      if (lsUser) {
-        setUser(lsUser)
-      }
-    } catch (err) {} // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) 
+    const lsUser = getUserFromLS()
+    if (lsUser) {
+      setUser(lsUser)
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <nav className='flex sticky top-0 md:flex-row justify-start items-center w-full py-3 px-6 md:px-20 lg:px-32 mb-10 md:mb-10'>
