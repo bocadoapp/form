@@ -25,7 +25,7 @@ function Ingredient (props) {
     
     push(ingredient)
     toggle(false)
-  }, [inputValue, selected])
+  }, [inputValue, selected, push, refs.qty, refs.unit, toggle])
 
   return (
     <div className='flex flex-col w-full'>

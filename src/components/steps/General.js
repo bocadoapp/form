@@ -19,16 +19,16 @@ const UPLOAD_FILE = gql`
 
 const General = () => {
   const [images, setImages] = useState([])
-  const [upload, { data }] = useMutation(UPLOAD_FILE)
+  const [upload] = useMutation(UPLOAD_FILE)
   const history = useHistory()
   const { locale } = useIntl()
-  const { user, setStep } = useStore()
+  const { setStep } = useStore()
   const onDrop = useCallback(acceptedFiles => {
     setImages([
       ...images,
       ...acceptedFiles.map(file =>({ ...file, preview: URL.createObjectURL(file) }))
     ])
-    // upload({ variables: { file: acceptedFiles[0] } })    
+    upload({ variables: { file: acceptedFiles[0] } })    
   }, [images, setImages, upload])
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
   const handleOnclick = useCallback(e => {
@@ -88,7 +88,7 @@ const General = () => {
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               <button type='button' className='bg-gray-100 border border-gray-300'>
-                📸 Puja fotos!
+                <span role='img' aria-label='camera'>📸</span> Puja fotos!
               </button>
             </div>        
           </div>
@@ -97,7 +97,7 @@ const General = () => {
             {images.map(file => (
               <div key={file.name || file.path} className='pic'>
                 <div className='pic-inner'>
-                  <img src={file.preview} />
+                  <img src={file.preview} alt='recipie preview' />
                 </div>
               </div>
             ))}
