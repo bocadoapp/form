@@ -14,7 +14,6 @@ function Ingredient (props) {
   }
 
   const handleClick = useCallback(e => {
-    console.log('handleClick', inputValue, selected);
     const fragment = {
       qty: refs.qty.current.value,
       unit: refs.unit.current.selectedOptions[0].value,

@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Header from './Header'
 import Form from './Form'
 
 const Layout = ({ children }) => {
   return (
-    <>
-      <div className='wrapper'>
-        <Header />
-        <Form>
-          {children}
-        </Form>
-      </div>
-    </>
+    <div className='wrapper'>
+      <Header />
+      <Form>
+        {children}
+      </Form>
+    </div>
   )
 }
 
-export default Layout
+export default memo(Layout)

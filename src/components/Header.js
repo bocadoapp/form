@@ -24,7 +24,10 @@ const Navbar = () => {
     if (lsUser) {
       setUser(lsUser)
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [])  
+
+  console.log('header', step);
+  
 
   return (
     <nav className='flex sticky top-0 md:flex-row justify-start items-center w-full py-3 px-6 md:px-20 lg:px-32 mb-10 md:mb-10'>
