@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "900705c1ce53690cd84eed5e81321f06",
+    "revision": "4a0d1e23704feb96e305cf859cc58e2d",
     "url": "/index.html"
   },
   {
-    "revision": "80926860a773dd8db4d5",
+    "revision": "8e4733298bb7a951fd63",
     "url": "/static/css/2.0d3c9e81.chunk.css"
   },
   {
-    "revision": "8f70edfea55a50d7b04f",
-    "url": "/static/css/main.df087e06.chunk.css"
+    "revision": "edd0f3bfcf33a9193cf6",
+    "url": "/static/css/main.df32cb8b.chunk.css"
   },
   {
-    "revision": "80926860a773dd8db4d5",
-    "url": "/static/js/2.1315115c.chunk.js"
+    "revision": "8e4733298bb7a951fd63",
+    "url": "/static/js/2.3cb0494f.chunk.js"
   },
   {
     "revision": "02b3897220fa0ff5376734687e85d84a",
-    "url": "/static/js/2.1315115c.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.3cb0494f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8f70edfea55a50d7b04f",
-    "url": "/static/js/main.f418a72d.chunk.js"
+    "revision": "edd0f3bfcf33a9193cf6",
+    "url": "/static/js/main.26a72f36.chunk.js"
   },
   {
     "revision": "06463f122e0a537a4991",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Comfortaa-Bold.8504a8e9.ttf"
   },
   {
-    "revision": "3ed9575dcc488c3e3a5bd66620bdf5a4",
-    "url": "/static/media/OpenSans-Regular.3ed9575d.ttf"
+    "revision": "a8e5c85520e9408f7aa1ed6bc5aeb657",
+    "url": "/static/media/Jost-Medium.a8e5c855.ttf"
   },
   {
     "revision": "0cb5a5c0d251c109458c85c6afeffbaa",
