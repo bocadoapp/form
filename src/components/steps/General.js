@@ -6,7 +6,6 @@ import { useMutation, gql } from '@apollo/client'
 
 import { Button } from '@bocado/ui'
 import withAnimation from '../../hoc/withAnimation'
-import { useStore } from '../../hooks/useStore'
 import{ useIntl } from 'react-intl'
 
 const UPLOAD_FILE = gql`
@@ -22,7 +21,6 @@ const General = () => {
   const [upload] = useMutation(UPLOAD_FILE)
   const history = useHistory()
   const { locale } = useIntl()
-  const { setStep } = useStore()
   const onDrop = useCallback(acceptedFiles => {
     setImages([
       ...images,
@@ -33,9 +31,8 @@ const General = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
   const handleOnclick = useCallback(e => {
     e.preventDefault()
-    setStep(3)
     history.push(`/${locale}/3`)
-  }, [history, locale, setStep])
+  }, [history, locale])
 
   useEffect(() => () => {
     images.forEach(file => URL.revokeObjectURL(file.preview));
@@ -105,7 +102,7 @@ const General = () => {
         </div>
       </div>
 
-      <Button styled='gradient' handleOnclick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
+      <Button styled='gradient' onClick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
         <i className="fas fa-hamburger mr-3" />
         Afegir ingredients!
       </Button>

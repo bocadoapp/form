@@ -2,6 +2,7 @@ import React from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Switch, Route, useHistory } from 'react-router-dom'
 
+import { useStore } from './hooks/useStore'
 import Layout from './components/Layout'
 import General from './components/steps/General'
 import Final from './components/steps/Final'
@@ -11,9 +12,17 @@ import Pasos from './components/steps/Pasos'
 import Home from './components/Home'
 
 function App() {
+  const { setStep } = useStore()
   const history = useHistory()
   const exitBeforeEnter = history.action === 'PUSH'
   
+  history.listen((location, action) => {
+    const step = Number(location.pathname.split('/').pop())
+    if (step && !isNaN(step)) {
+      setStep(step)
+    }
+  })
+
   return (
     <Layout>
       <AnimatePresence exitBeforeEnter={exitBeforeEnter}>

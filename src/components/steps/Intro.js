@@ -32,7 +32,7 @@ const GET_USER_FROM_TOKEN = gql`
 const Intro = () => {
   const [token, setToken] = useState(null)
   const history = useHistory()
-  const { user, setUser, setStep } = useStore()
+  const { user, setUser } = useStore()
   const { locale } = useIntl()
   const { loading, data } = useQuery(GET_USER_FROM_TOKEN, { skip: token === null, variables: { token }})
   const handleOnlogin = provider => {
@@ -43,9 +43,8 @@ const Intro = () => {
     if (user) {
       setUser(user)
     }
-    setStep(2)
     history.push(`/${locale}/2`)
-  }, [history, setStep, setUser, locale])
+  }, [history, setUser, locale])
 
   useEffect(() => {
     if (!user && !loading && data) {
@@ -68,7 +67,7 @@ const Intro = () => {
       saveAndGoToStep2()
     }
   }, [user, saveAndGoToStep2])
-
+  
   return (
     <div>
       <div className='flex flex-col md:flex-row justify-center items-center'>

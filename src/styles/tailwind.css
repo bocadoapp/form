@@ -9,8 +9,8 @@ html {
 }
 
 @font-face {
-  font-family: 'Fira Sans';
-  src: url('./fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  font-family: 'Jost';
+  src: url('./fonts/Jost/Jost-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -24,8 +24,8 @@ html {
 }
 
 body {
-  font-family: 'Fira Sans';
-  @apply text-gray-800;
+  font-family: 'Jost';
+  @apply text-gray-700;
 }
 
 p {

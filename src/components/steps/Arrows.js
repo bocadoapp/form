@@ -6,13 +6,12 @@ import { useStore } from '../../hooks/useStore'
 
 const Arrow = ({ className, type }) => {
   const history = useHistory()
-  const { step, setStep } = useStore()
+  const { step } = useStore()
   const { locale } =  useIntl()
   const handleOnclick = useCallback(() => {
     const nextStep = type === 'prev' ? Number(step) - 1 : Number(step) + 1    
-    setStep(nextStep)
     history.push(`/${locale}/${nextStep}`)
-  }, [step, type, history, locale, setStep])
+  }, [step, type, history, locale])
   
   return (
     <div

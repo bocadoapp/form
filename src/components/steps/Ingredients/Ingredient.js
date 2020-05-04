@@ -13,7 +13,7 @@ function Ingredient (props) {
     name: useRef(null)
   }
 
-  const handleClick = useCallback(e => {
+  const handleClick = useCallback(e => {    
     const fragment = {
       qty: refs.qty.current.value,
       unit: refs.unit.current.selectedOptions[0].value,

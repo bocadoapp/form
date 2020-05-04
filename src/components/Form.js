@@ -34,7 +34,7 @@ const Form = ({ children }) => {
       validate={handleValidate}
     >
       {({ values, errors }) => (
-        <FormikForm>
+        <FormikForm className='w-full'>
           {children}
         </FormikForm>
       )}

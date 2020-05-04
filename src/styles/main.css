@@ -10939,9 +10939,9 @@ html {
 }
 
 @font-face {
-  font-family: 'Fira Sans';
+  font-family: 'Jost';
 
-  src: url('./fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  src: url('./fonts/Jost/Jost-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -10956,8 +10956,8 @@ html {
 }
 
 body {
-  font-family: 'Fira Sans';
-  color: #2d3748;
+  font-family: 'Jost';
+  color: #4a5568;
 }
 
 p {
