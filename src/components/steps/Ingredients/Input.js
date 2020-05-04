@@ -84,9 +84,9 @@ function Input ({
               value: inputValue || '',
               placeholder: 'Nom ingredient'
             })}
-            className='border-0'
+            className='w-full p-2 border-0'
           />
-          {selectedItem ? (
+          {/* {selectedItem ? (
             <button
               onClick={clearSelection}
               aria-label="clear selection"
@@ -96,10 +96,10 @@ function Input ({
             </button>
           ) : (
             <button {...getToggleButtonProps()} className='w-10'>
-              {/* <ArrowIcon isOpen={isOpen} /> */}
+              <ArrowIcon isOpen={isOpen} />
               ^
             </button>
-          )}
+          )} */}
         </div>
         <div style={{position: 'relative'}}>
           {isOpen ? (

@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
   return (
     <div className='wrapper'>
       <Header />
-      <div className='flex flex-col md:flex-row w-full lg:max-w-screen-md lg:max-w-screen-lg m-auto leading-relaxed'>
+      <div className='flex flex-col lg:flex-row w-full lg:max-w-screen-md lg:max-w-screen-lg m-auto leading-relaxed'>
         <Sidebar />
         <Form>
           {children}

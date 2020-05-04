@@ -45,29 +45,42 @@ const General = () => {
         <Field type='email' name='user.email' placeholder='E-mail' />
       </div> */}
 
-      <Field type='text' name='name' placeholder='Nom de la recepta' className='text-3xl mb-8' />
+      <Field type='text' name='name' placeholder='Nom de la recepta' className='input text-3xl mb-8' />
 
-      <div className='flex items-center mb-5'>
+      <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-10 mr-5 text-center">
           <i className="fas fa-users" />
         </div>
-        <Field type='number' name='diners' placeholder='Numero de començals' />
+        <Field
+          type='number'
+          name='diners'
+          placeholder='Numero de començals'
+          className='w-full p-2'
+        />
       </div>
 
-      <div className='flex items-center mb-5'>
+      <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-10 mr-5 text-center">
           <i className="fas fa-stopwatch" />
         </div>
-        <Field type='number' min='5' step='5' name='cooking_time' placeholder='Temps cocció' />
+        <Field
+          className='w-full p-2'
+          type='number'
+          min='5'
+          step='5'
+          name='cooking_time'
+          placeholder='Temps cocció'
+        />
+        <span className='text-xs p-2'>minuts</span>
       </div>      
 
-      <div className='flex items-center mb-5'>
+      <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-10 mr-5 text-center">
           <i className="fas fa-tag" />
         </div>      
         <Field name='cuisine'>
           {({ field }) => (
-            <select {...field} className='w-full h-10'>
+            <select {...field} className='w-full h-10 bg-white'>
               <option>Tipus de cuina</option>
               <option>Mediterrànea</option>
               <option>Asiàtica</option>
@@ -102,10 +115,16 @@ const General = () => {
         </div>
       </div>
 
-      <Button styled='gradient' onClick={handleOnclick} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
-        <i className="fas fa-hamburger mr-3" />
-        Afegir ingredients!
-      </Button>
+      <div className="w-full md:max-w-xs md:m-auto rounded-full">
+        <Button
+          styled='gradient'
+          onClick={handleOnclick}
+          className='shadow-full mt-8 items-center text-orange-100' 
+        >
+          <i className="fas fa-hamburger mr-3" />
+          Afegir ingredients!
+        </Button>        
+      </div>
     </div>
   )
 }

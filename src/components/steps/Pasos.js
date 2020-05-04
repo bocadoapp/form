@@ -26,7 +26,7 @@ function AddStep ({ toggle, push }) {
           placeholder='Explicació del pas a seguir'
         />
       </div>
-      <Button type='button' className='w-full' styled='success' onClick={handleClick}>
+      <Button type='button' className='w-64 m-auto' styled='success' onClick={handleClick}>
         Afegir
       </Button>      
     </div>

@@ -5,7 +5,7 @@
   "homepage": "https://form.bocadoapp.com/",
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.43",
-    "@bocado/ui": "0.0.45",
+    "@bocado/ui": "0.0.46",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

@@ -19,16 +19,16 @@ const Sidebar = () => {
   }, [history, locale])
 
   return (
-    <aside className='w-full md:max-w-xs flex md:mr-10'>
-      <div className='w-full flex md:flex-col'>
+    <aside className='w-full lg:max-w-xs flex md:mr-10'>
+      <div className='w-full flex lg:flex-col'>
         {steps.map(({ name, icon, num }) => (
           <div
             key={`step-${num}`}
             className={cn(
-              'flex w-full items-center md:px-3 py-4 justify-center md:justify-start',
+              'flex w-full items-center md:px-3 py-4 justify-center lg:justify-start',
               step === num ? 'text-gray-700' : 'text-gray-400',
-              step === num && 'md:shadow-md md:rounded-lg',
-              step !== num && num !== 1 && 'md:cursor-pointer'
+              step === num && 'lg:shadow-md lg:rounded-lg',
+              step !== num && num !== 1 && 'cursor-pointer'
             )}
             onClick={() => num !== 1 && step !== num && goTo(num)}
           >

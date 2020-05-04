@@ -32,8 +32,8 @@ p {
   @apply my-5;
 }
 
-input, button {
-  @apply p-2 border border-gray-300 rounded w-full;
+input.input, button {
+  @apply py-2 px-4 border border-gray-300 rounded w-full;
 }
 
 .menu a:not(:last-child) {

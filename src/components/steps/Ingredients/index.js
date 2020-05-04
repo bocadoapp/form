@@ -1,35 +1,32 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { FieldArray } from 'formik'
 import { Button } from '@bocado/ui'
+import { useHistory } from 'react-router-dom'
 
 import Ingredient from './Ingredient'
 import withAnimation from '../../../hoc/withAnimation'
+import { useIntl } from 'react-intl'
 
 const Ingredients = () => {
-  const [showAdd, toggleShowAdd] = useState(true)
-  const handleClick = useCallback(() => toggleShowAdd(!showAdd), [showAdd, toggleShowAdd])
+  const history = useHistory()
+  const { locale } = useIntl()
+  const handleOnclick = useCallback(() => {
+    history.push(`/${locale}/4`)
+  }, [history, locale])
 
   return (
     <div className='w-full'>
       <FieldArray
         name='ingredients'
         render={({ form: { values }, remove, push }) => {
+          const disabled = values.ingredients.length === 0
+
           return (
             <>
-              <div className='flex'>
-                <button
-                  type='button'
-                  // disabled={showAdd}
-                  className='border border-gray-300 bg-gray-100 text-gray-600 mr-2'
-                  onClick={handleClick}
-                >
-                  Nou ingredient
-                </button>                
-                <Button styled='gradient' className='ml-2' disabled={values.ingredients.length === 0}>
-                  Fet!
-                </Button>
+              <div className="bg-gray-100 px-4 py-2 rounded-md">
+                <Ingredient push={push} />
               </div>
-              {showAdd && <Ingredient toggle={toggleShowAdd} push={push} />}
+              
               {values.ingredients.map(({ label, qty, unit }, i) => {
                 return (
                   <div key={`ing-${i}`} className='flex items-center justify-between py-2 my-2 border-b border-gray-200 text-gray-500'>
@@ -40,6 +37,20 @@ const Ingredients = () => {
                   </div>
                 )
               })}
+              <div className='w-full md:max-w-xs m-auto mt-12'>
+                <Button
+                  styled='gradient'
+                  className='ml-2'
+                  disabled={disabled}
+                  onClick={handleOnclick}
+                >
+                  {disabled ? (
+                    <>Una recepta sense ingredients ? <span role='img' aria-label='think'>🤔</span></>
+                  ) : (
+                    <><span role='img' aria-label='paper'>📝</span> Explica'ns com es fa!</>
+                  )}
+                </Button>
+              </div>
             </>          
           )          
         }}
