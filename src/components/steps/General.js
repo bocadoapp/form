@@ -25,21 +25,14 @@ const General = () => {
   }, [images, setImages, upload])
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
 
-  useEffect(() => () => {
-    images.forEach(file => URL.revokeObjectURL(file.preview));
-  }, [images])  
+  useEffect(() => () => images.forEach(file => URL.revokeObjectURL(file.preview)), [images])  
 
   return (
     <div className='w-full text-gray-600 step-general'>
-      {/* <div>
-        <Field type='text' name='user.name' placeholder='Nom' />
-        <Field type='email' name='user.email' placeholder='E-mail' />
-      </div> */}
-
       <Field type='text' name='name' placeholder='Nom de la recepta' className='input text-3xl mb-8' />
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
-        <div className="w-10 mr-5 text-center">
+        <div className="w-8 text-center">
           <i className="fas fa-users" />
         </div>
         <Field
@@ -51,7 +44,7 @@ const General = () => {
       </div>
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
-        <div className="w-10 mr-5 text-center">
+        <div className="w-8 text-center">
           <i className="fas fa-stopwatch" />
         </div>
         <Field
@@ -66,7 +59,7 @@ const General = () => {
       </div>      
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
-        <div className="w-10 mr-5 text-center">
+        <div className="w-8 text-center">
           <i className="fas fa-tag" />
         </div>      
         <Field name='cuisine'>
@@ -80,30 +73,22 @@ const General = () => {
         </Field>          
       </div>
 
-      <div className='flex items-center mb-5'>
-        <div className="w-10 mr-5 text-center">
-          <i className="far fa-images" />
-        </div>
-        <div className='flex'>
-          <div className='flex w-full items-center mr-3'>
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <button type='button' className='bg-gray-100 border border-gray-300'>
-                <span role='img' aria-label='camera'>📸</span> Puja fotos!
-              </button>
-            </div>        
-          </div>
+      <div {...getRootProps()} className='flex flex-col w-full items-center border-4 border-gray-200 border-dashed rounded overflow-hidden'>
+        <input {...getInputProps()} />
+        <p className='text-center'>
+          <i className="far fa-images mr-3 text-3xl" /><br />
+          Arrastra imatges aqui, o be fes click
+        </p>
 
-          <div className="flex my-3">
-            {images.map(file => (
-              <div key={file.name || file.path} className='pic'>
-                <div className='pic-inner'>
-                  <img src={file.preview} alt='recipie preview' />
-                </div>
+        <div className="flex my-3">
+          {images.map(file => (
+            <div key={file.name || file.path} className='pic'>
+              <div className='pic-inner'>
+                <img src={file.preview} alt='recipie preview' />
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          ))}
+        </div>        
       </div>
     </div>
   )

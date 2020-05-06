@@ -1,26 +1,32 @@
-import React, { useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { FieldArray } from 'formik'
-import { Button } from '@bocado/ui'
-import { useHistory } from 'react-router-dom'
+import { useFormikContext } from 'formik'
 
 import Ingredient from './Ingredient'
 import withAnimation from '../../../hoc/withAnimation'
-import { useIntl } from 'react-intl'
+import { useStore } from '../../../hooks/useStore'
 
 const Ingredients = () => {
-  const history = useHistory()
-  const { locale } = useIntl()
-  const handleOnclick = useCallback(() => {
-    history.push(`/${locale}/4`)
-  }, [history, locale])
+  const { values: { ingredients } } = useFormikContext()
+  const { setBtn } = useStore()
 
+  useEffect(() => {    
+    if (ingredients.length) {
+      return setBtn({
+        label: 'Passos',
+        icon: 'fas fa-list-ol',
+        styled: 'gradient',
+        disabled: false
+      })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ingredients.length])
+  
   return (
     <div className='w-full'>
       <FieldArray
         name='ingredients'
         render={({ form: { values }, remove, push }) => {
-          const disabled = values.ingredients.length === 0
-
           return (
             <>
               <div className="bg-gray-100 px-4 py-2 rounded-md">
@@ -37,20 +43,6 @@ const Ingredients = () => {
                   </div>
                 )
               })}
-              <div className='w-full md:max-w-xs m-auto mt-12'>
-                <Button
-                  styled='gradient'
-                  className='ml-2'
-                  disabled={disabled}
-                  onClick={handleOnclick}
-                >
-                  {disabled ? (
-                    <>Una recepta sense ingredients ? <span role='img' aria-label='think'>🤔</span></>
-                  ) : (
-                    <><span role='img' aria-label='paper'>📝</span> Explica'ns com es fa!</>
-                  )}
-                </Button>
-              </div>
             </>          
           )          
         }}

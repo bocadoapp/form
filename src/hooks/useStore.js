@@ -1,31 +1,27 @@
 import React, { useContext, createContext, useReducer } from 'react'
+import { getBtnData, getInitialStep } from '../lib/helpers'
 
 const Context = createContext()
-
-const initialStep = () => {
-  const step = Number(window.location.hash.split('/').find(e => !isNaN(Number(e))))  
-  return step || 1
-}
-
-const getBtnData = () => {
-
-}
-
+const initialStep = getInitialStep()
 const initialState = {
-  step: initialStep(),
+  step: initialStep,
   numSteps: 4,
   user: null,
-  btn: getBtnData()
+  btn: getBtnData(initialStep)
 }
 
 function reducer (state = initialState, action) {
   switch (action.type) {
     case 'SET_STEP':
-      return {...state, step: action.step}
+      return {
+        ...state,
+        step: action.step,
+        btn: getBtnData(action.step)
+      }
     case 'SET_USER':
       return { ...state, user: action.user }
-    case 'SET_BUTTON':
-      return { ...state, btn: action.btn }
+    case 'SET_BUTTON':      
+      return { ...state, btn: { ...state.btn, ...action.btn } }
     default:
       return {...state}
   }
@@ -43,6 +39,6 @@ export function useStore () {
   const [state, dispatch] = useContext(Context)
   const setStep = step => dispatch({ type: 'SET_STEP', step })
   const setUser = user => dispatch({ type: 'SET_USER', user })
-  const setBtn = btn => dispatch({ type: 'SET_BTN', btn })
+  const setBtn = btn => dispatch({ type: 'SET_BUTTON', btn })
   return {...state, setStep, setUser, setBtn }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, Form as FormikForm } from 'formik'
+import cn from 'classnames'
 
 const initialValues = {
   user: {
@@ -12,13 +13,13 @@ const initialValues = {
   cooking_time: '',
   cuisine: '',
   ingredients: [],
-  steps: [],
+  passos: [],
   pics: [],
   videos: [],
   picsPerStep: []
 }
 
-const Form = ({ children }) => {
+const Form = ({ children, className }) => {
   function handleOnSubmit (values) {
     console.log('values', values)
   }
@@ -33,8 +34,8 @@ const Form = ({ children }) => {
       onSubmit={handleOnSubmit}
       validate={handleValidate}
     >
-      {({ values, errors }) => (
-        <FormikForm className='w-full'>
+      {() => (
+        <FormikForm className={cn('w-full', className)}>
           {children}
         </FormikForm>
       )}
