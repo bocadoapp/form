@@ -33,7 +33,8 @@
     "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css -w",
     "publish": "gh-pages -d build -r https://$GH_TOKEN@github.com/bocadoapp/form.git",
-    "deploy": "npm run build && npm run publish"
+    "deploy": "npm run build && npm run publish",
+    "serve": "npx serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
