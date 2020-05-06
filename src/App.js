@@ -8,7 +8,7 @@ import General from './components/steps/General'
 import Final from './components/steps/Final'
 import Intro from './components/steps/Intro'
 import Ingredients from './components/steps/Ingredients'
-import Pasos from './components/steps/Pasos'
+import Passos from './components/steps/Passos'
 import Home from './components/Home'
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
             <Ingredients />
           </Route>
           <Route path='/:lang/4' exact> 
-            <Pasos />
+            <Passos />
           </Route>
           <Route path='/:lang/5' exact> 
             <Final />

@@ -7,10 +7,15 @@ const initialStep = () => {
   return step || 1
 }
 
+const getBtnData = () => {
+
+}
+
 const initialState = {
   step: initialStep(),
   numSteps: 4,
-  user: null
+  user: null,
+  btn: getBtnData()
 }
 
 function reducer (state = initialState, action) {
@@ -18,7 +23,9 @@ function reducer (state = initialState, action) {
     case 'SET_STEP':
       return {...state, step: action.step}
     case 'SET_USER':
-      return { ...state, user: action.user } 
+      return { ...state, user: action.user }
+    case 'SET_BUTTON':
+      return { ...state, btn: action.btn }
     default:
       return {...state}
   }
@@ -36,5 +43,6 @@ export function useStore () {
   const [state, dispatch] = useContext(Context)
   const setStep = step => dispatch({ type: 'SET_STEP', step })
   const setUser = user => dispatch({ type: 'SET_USER', user })
-  return {...state, setStep, setUser }
+  const setBtn = btn => dispatch({ type: 'SET_BTN', btn })
+  return {...state, setStep, setUser, setBtn }
 }

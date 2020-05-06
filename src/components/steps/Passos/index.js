@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { FieldArray } from 'formik'
 import { Button } from '@bocado/ui'
 
-import withAnimation from '../../hoc/withAnimation'
+import withAnimation from '../../../hoc/withAnimation'
 
-function AddStep ({ toggle, push }) {
+function AddStep ({ push }) {
   const refs = {
     text: useRef(null),
   }
@@ -14,8 +14,7 @@ function AddStep ({ toggle, push }) {
       text: refs.text.current.value
     }
     push(step)
-    toggle(false)
-  }, [push, toggle, refs.text])
+  }, [push, refs.text])
 
   return (
     <div className='flex flex-col w-full'>
@@ -34,9 +33,6 @@ function AddStep ({ toggle, push }) {
 }
 
 const Steps = () => {
-  const [showAdd, toggleShowAdd] = useState(true)
-  const handleClick = useCallback(() => toggleShowAdd(!showAdd), [showAdd, toggleShowAdd])
-
   return (
     <div className='w-full'>
       <FieldArray
@@ -44,19 +40,12 @@ const Steps = () => {
         render={({ form: { values }, remove, push }) => {
           return (
             <>
-              <div className='flex'>
-                <button
-                  // disabled={showAdd}
-                  className='border border-gray-300 bg-gray-100 text-gray-600 mr-2'
-                  onClick={handleClick}
-                >
-                  Nou pas
-                </button>                
-                <Button className='ml-2' disabled={values.steps.length === 0}>
+              <div className='flex'>              
+                <Button styled='gradient' className='ml-2' disabled={values.steps.length === 0}>
                   Fet!
                 </Button>
               </div>
-              {showAdd && <AddStep toggle={toggleShowAdd} push={push} />}
+              <AddStep push={push} />
               {values.steps.map(({ text }, i) => {
                 return (
                   <div key={`step-${i}`} className='flex items-center justify-between py-2 my-2 border-b border-gray-200 text-gray-500'>

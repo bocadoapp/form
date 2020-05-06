@@ -1,12 +1,9 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { Field } from 'formik'
-import { useHistory } from 'react-router-dom'
 import { useDropzone } from 'react-dropzone'
 import { useMutation, gql } from '@apollo/client'
 
-import { Button } from '@bocado/ui'
 import withAnimation from '../../hoc/withAnimation'
-import{ useIntl } from 'react-intl'
 
 const UPLOAD_FILE = gql`
   mutation Upload($file: Upload) {
@@ -19,8 +16,6 @@ const UPLOAD_FILE = gql`
 const General = () => {
   const [images, setImages] = useState([])
   const [upload] = useMutation(UPLOAD_FILE)
-  const history = useHistory()
-  const { locale } = useIntl()
   const onDrop = useCallback(acceptedFiles => {
     setImages([
       ...images,
@@ -29,10 +24,6 @@ const General = () => {
     upload({ variables: { file: acceptedFiles[0] } })    
   }, [images, setImages, upload])
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
-  const handleOnclick = useCallback(e => {
-    e.preventDefault()
-    history.push(`/${locale}/3`)
-  }, [history, locale])
 
   useEffect(() => () => {
     images.forEach(file => URL.revokeObjectURL(file.preview));
@@ -113,17 +104,6 @@ const General = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="w-full md:max-w-xs md:m-auto rounded-full">
-        <Button
-          styled='gradient'
-          onClick={handleOnclick}
-          className='shadow-full mt-8 items-center text-orange-100' 
-        >
-          <i className="fas fa-hamburger mr-3" />
-          Afegir ingredients!
-        </Button>        
       </div>
     </div>
   )
