@@ -23,19 +23,22 @@ function AddStep ({ passos, push }) {
         Pas {passos.length + 1}
       </h3>
       <div className="flex justify-between my-4">
+        <div className='flex flex-col'>
+          <Button
+            type='button'
+            className='w-32 items-center'
+            styled='default'
+            onClick={handleClick}
+            size='sm'
+          >
+            <i className="far fa-images mr-3" />
+            Pujar foto
+          </Button>
+          <span className="text-xs text-gray-400 text-center">Opcional</span>
+        </div>
         <Button
           type='button'
-          className='w-32 items-center'
-          styled='default'
-          onClick={handleClick}
-          size='sm'
-        >
-          <i className="far fa-images mr-3" />
-          Pujar foto
-        </Button>        
-        <Button
-          type='button'
-          className='w-32 items-center'
+          className='w-32 items-center mb-auto'
           styled='success'
           onClick={handleClick}
           size='sm'
