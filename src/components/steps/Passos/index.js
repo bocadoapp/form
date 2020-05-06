@@ -38,10 +38,11 @@ function AddStep ({ passos, push }) {
         </div>
         <Button
           type='button'
-          className='w-32 items-center mb-auto'
+          className='items-center mb-auto'
           styled='success'
           onClick={handleClick}
           size='sm'
+          style={{ width: '6rem' }}
         >
           <i className="fas fa-plus mr-3" />
           Afegir

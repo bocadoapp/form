@@ -47,7 +47,7 @@ function Ingredient (props) {
             />           
           </div>
         </div>
-        <Button type='button' styled='success md:w-24 m-auto md:ml-4' onClick={handleClick}>
+        <Button type='button' styled='success m-auto md:ml-4' onClick={handleClick} style={{ width: '6rem' }}>
           Afegir
         </Button>
       </div>
