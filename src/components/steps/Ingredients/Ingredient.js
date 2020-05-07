@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 
+import { useStore } from '../../../hooks/useStore'
 import Input from './Input'
 import { Button } from '@bocado/ui'
 
@@ -7,6 +8,7 @@ function Ingredient (props) {
   const { push } = props
   const [inputValue, setInputValue] = useState('')
   const [selected, setSelected] = useState(null)
+  const { points, setPoints } = useStore()
   const refs = {
     qty: useRef(null),
     unit: useRef(null),
@@ -23,7 +25,8 @@ function Ingredient (props) {
       : { type: 'custom', label: inputValue, value: inputValue, ...fragment }
     
     push(ingredient)
-  }, [inputValue, selected, push, refs.qty, refs.unit])
+    setPoints(points + 5)
+  }, [inputValue, selected, push, refs.qty, refs.unit, points, setPoints])
 
   return (
     <div className='flex flex-col w-full'>
