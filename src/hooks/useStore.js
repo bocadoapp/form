@@ -7,7 +7,9 @@ const initialState = {
   step: initialStep,
   numSteps: 4,
   user: null,
-  btn: getBtnData(initialStep)
+  btn: getBtnData(initialStep),
+  triggerAnimation: false,
+  points: 0
 }
 
 function reducer (state = initialState, action) {
@@ -22,6 +24,12 @@ function reducer (state = initialState, action) {
       return { ...state, user: action.user }
     case 'SET_BUTTON':      
       return { ...state, btn: { ...state.btn, ...action.btn } }
+    case 'TOGGLE_ANI':
+      return { ...state, triggerAnimation: action.value }
+    case 'SET_POINTS': {
+      const triggerAnimation = action.withAnimation ? !state.withAnimation : state.withAnimation
+      return { ...state, points: action.points, triggerAnimation }
+    }
     default:
       return {...state}
   }
@@ -40,5 +48,10 @@ export function useStore () {
   const setStep = step => dispatch({ type: 'SET_STEP', step })
   const setUser = user => dispatch({ type: 'SET_USER', user })
   const setBtn = btn => dispatch({ type: 'SET_BUTTON', btn })
-  return {...state, setStep, setUser, setBtn }
+  const setPoints = (points, withAnimation = true) => dispatch({ type: 'SET_POINTS', points, withAnimation })
+  const toggleAnimation = (value, cb) => {
+    dispatch({ type: 'TOGGLE_ANI', value })
+    if (cb) cb()
+  }
+  return {...state, setStep, setUser, setBtn, toggleAnimation, setPoints }
 }
