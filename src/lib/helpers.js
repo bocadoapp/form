@@ -4,7 +4,7 @@ const btnSteps = [
   { disabled: false, styled: 'gradient', label: 'Informació', icon: 'fas fa-info-circle' },
   { disabled: false, styled: 'gradient', label: 'Ingredients', icon: 'fas fa-carrot' },
   { disabled: true, styled: 'gradient', label: 'Passos', icon: 'fas fa-list-ol', disabledMessage: 'Has d\'afegir minim 1 ingredient 🙏' },
-  { disabled: true, styled: 'success', label: 'Guardar', icon: 'far fa-save', disabledMessage: 'Has d\'afegir minim 1 pas 🙏' }
+  { disabled: false, styled: 'success', label: 'Guardar', icon: 'far fa-save', disabledMessage: 'Has d\'afegir minim 1 pas 🙏' }
 ]
 
 export const getBtnData = step =>  btnSteps[step]
