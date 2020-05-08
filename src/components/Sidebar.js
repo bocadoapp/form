@@ -49,14 +49,21 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <div className='absolute bottom-0 left-0 right-0 md:relative flex flex-col md:mt-8 mb-6 md:mb-auto px-4 md:px-auto'>
-          <span className='text-xs text-gray-400 m-auto'>SEGÜENT PAS</span>
-          <Button disabled={btn.disabled} styled={btn.styled} className='items-center' onClick={goToNext}>
-            {btn.icon && btn.icon !== '' ? <i className={cn('mr-3', btn.icon)} /> : null}
-            {btn.label}
-          </Button>
-          {btn.disabled && btn.disabledMessage ? <span className='text-xs text-gray-400 m-auto'>{btn.disabledMessage}</span> : null}
-        </div>
+        {step > 1 && (
+          <div className='absolute bottom-0 left-0 right-0 md:relative flex flex-col md:mt-8 mb-6 md:mb-auto px-4 md:px-auto'>
+            <span className='text-xs text-gray-400 m-auto'>SEGÜENT PAS</span>
+            <Button
+              disabled={btn.disabled}
+              styled={btn.styled}
+              className='items-center'
+              onClick={goToNext}
+            >
+              {btn.icon && btn.icon !== '' ? <i className={cn('mr-3', btn.icon)} /> : null}
+              {btn.label}
+            </Button>
+            {btn.disabled && btn.disabledMessage ? <span className='text-xs text-gray-400 m-auto'>{btn.disabledMessage}</span> : null}
+          </div>
+        )}
       </div>
     </aside>
   );
