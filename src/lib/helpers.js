@@ -24,3 +24,7 @@ export const getUserFromLS = () => {
     return null
   }
 }
+
+export const r = () => Math.floor(Math.random() * (50 - 1 + 1) + 1)
+export const emojis = ['🥕', '🍅', '🥬', '🌽', '🍆', '🥭', '🥥', '🥝', '🍓', '🍒', '🍑', '🍐', '🍏', '🍎', '🍍', '🍌', '🍋', '🍊', '🍉', '🍈', '🍇']
+export const random = (min, max) => Math.random() * (max - min + 1) + min

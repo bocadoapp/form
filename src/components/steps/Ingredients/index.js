@@ -8,7 +8,7 @@ import { useStore } from '../../../hooks/useStore'
 
 const Ingredients = () => {
   const { values: { ingredients } } = useFormikContext()
-  const { setBtn } = useStore()
+  const { points, setPoints, setBtn } = useStore()
 
   useEffect(() => {    
     if (ingredients.length) {
@@ -39,7 +39,13 @@ const Ingredients = () => {
                      <span>
                       {qty}{unit} <span className='text-gray-700'>{label}</span>
                      </span>
-                     <i className="far fa-times-circle cursor-pointer" onClick={() => remove(i)} />
+                     <i
+                      className="far fa-times-circle cursor-pointer"
+                      onClick={() => {
+                        setPoints(points - 5, false)
+                        remove(i)
+                      }}
+                    />
                   </div>
                 )
               })}

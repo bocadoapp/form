@@ -3,16 +3,34 @@ import cn from 'classnames'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { Button } from '@bocado/ui'
-// import { useFormikContext } from 'formik'
 
 import { useStore } from '../hooks/useStore'
 import steps from '../lib/steps'
 import { getUserFromLS } from '../lib/helpers'
-import Avatar from './Avatar'
+import User from './User'
+
+const StepInfo = ({ icon, name }) => {
+  if (!icon) {
+    return <User />
+  }
+
+  return (
+    <>
+      <span className='mr-3'>
+        <i className={icon} />
+      </span>
+      <div className="flex w-full justify-between">
+        <span className='hidden md:inline'>
+          {name}
+        </span>
+      </div>
+    </>
+  )
+}
 
 const Sidebar = () => {
   // const { values } = useFormikContext()
-  const { step, btn } = useStore()
+  const { step, btn } = useStore()
   const history = useHistory()
   const { locale } = useIntl()
   const lsUser = getUserFromLS()
@@ -26,25 +44,28 @@ const Sidebar = () => {
     <aside className='w-full lg:max-w-xs flex md:mr-10'>
       <div className='w-full'>
         <div className='flex w-full flex lg:flex-col'>
-          {steps.map(({ name, icon, num }) => (
-            <div
-              key={`step-${num}`}
-              className={cn(
-                'flex w-full items-center md:px-3 py-4 justify-center lg:justify-start',
-                step === num ? 'text-gray-700' : 'text-gray-400',
-                step === num && 'lg:shadow-md lg:rounded-lg',
-                step !== num && num !== 1 && 'cursor-pointer'
-              )}
-              onClick={() => num !== 1 && step !== num && goTo(num)}
-            >
-              <span className='mr-3'>
-                {num === 1 && !!lsUser ? <Avatar /> : <i className={icon} />}
-              </span>
-              <span className='hidden md:inline'>
-                {num === 1 && !!lsUser ? (lsUser.username || lsUser.name) : name}
-              </span>
-            </div>
-          ))}
+          {steps.map(({ name, icon, num }) => {
+            const isFirstStep = num === 1
+            const isSameStep = step === num
+
+            return (
+              <div
+                key={`step-${num}`}
+                className={cn(
+                  'flex w-full items-center md:px-3 py-4 justify-center lg:justify-start',
+                  isSameStep ? 'text-gray-700' : 'text-gray-400',
+                  isSameStep && 'lg:shadow-md lg:rounded-lg',
+                  !isSameStep && !isFirstStep && 'cursor-pointer'
+                )}
+                onClick={() => !isFirstStep && !isSameStep && goTo(num)}
+              >
+                {isFirstStep && lsUser
+                  ? <User name={lsUser.username || lsUser.name} />
+                  : <StepInfo icon={icon} name={name} />
+                }
+              </div>
+            )
+          })}
         </div>
 
         {step > 1 && btn && (
