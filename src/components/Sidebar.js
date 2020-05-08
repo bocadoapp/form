@@ -10,8 +10,6 @@ import steps from '../lib/steps'
 import { getUserFromLS } from '../lib/helpers'
 import Avatar from './Avatar'
 
-
-
 const Sidebar = () => {
   // const { values } = useFormikContext()
   const { step, btn } = useStore()
@@ -49,7 +47,7 @@ const Sidebar = () => {
           ))}
         </div>
 
-        {step > 1 && (
+        {step > 1 && btn && (
           <div className='absolute bottom-0 left-0 right-0 md:relative flex flex-col md:mt-8 mb-6 md:mb-auto px-4 md:px-auto'>
             <span className='text-xs text-gray-400 m-auto'>SEGÜENT PAS</span>
             <Button
