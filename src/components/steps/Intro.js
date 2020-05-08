@@ -3,7 +3,9 @@ import { useQuery, gql } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 import{ FormattedMessage, useIntl } from 'react-intl'
 import { Button } from '@bocado/ui'
+import { AnimatePresence } from 'framer-motion'
 
+import { Register, Login } from '../Auth'
 import { useStore } from '../../hooks/useStore'
 import withAnimation from '../../hoc/withAnimation'
 
@@ -30,6 +32,7 @@ const GET_USER_FROM_TOKEN = gql`
 `
 
 const Intro = () => {
+  const [showRegister, toggleShowRegister] = useState(true)
   const [token, setToken] = useState(null)
   const history = useHistory()
   const { user, setUser } = useStore()
@@ -45,6 +48,8 @@ const Intro = () => {
     }
     history.push(`/${locale}/2`)
   }, [history, setUser, locale])
+
+  const toggleShowRegisterPerf = useCallback(() => toggleShowRegister(!showRegister), [showRegister])
 
   useEffect(() => {
     if (!user && !loading && data) {
@@ -88,33 +93,17 @@ const Intro = () => {
           </p>      
         </div>
         <div className='flex flex-col w-full md:w-1/2 md:ml-5 px-8 md:px-0'>
-          <div className='flex flex-col justify-center bg-gray-100 p-3 rounded-lg shadow-xl'>
-            <div className='mb-3'>
-              <input className='input' type="text" placeholder='Nom i cognoms'/>
-            </div>
-            <div className='mb-3'>
-              <input className='input' type="email" placeholder='Correu electrònic'/>
-            </div>
-            <button className='border bg-gray-300 hover:bg-gray-400 text-gray-500'>
-              Registrar-me!
-            </button>
-          </div>
-
-          <div className='flex'>
-            <Button
-              loading={loading}
-              onClick={() => handleOnlogin('facebook')}
-              className='mt-8 items-center text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full'
-              size='sm'
-            >
-              <i className="fab fa-facebook mr-3" />
-              Registrar-me amb Facebook
-            </Button>
-            {/* <Button onClick={() => handleOnlogin('instagram')} className='shadow-full mt-8 items-center text-orange-100' size='sm'>
-              <i className="fab fa-instagram mr-3" />
-              Registrar-me amb Instagram
-            </Button> */}
-          </div>
+          <AnimatePresence exitBeforeEnter>
+            {showRegister
+              ? <Register
+                  loading={loading}
+                  handleOnlogin={handleOnlogin}
+                  key='showRegister'
+                  toggleShowRegister={toggleShowRegisterPerf}
+                />
+              : <Login key='showLogin' toggleShowRegister={toggleShowRegisterPerf} />
+            }
+          </AnimatePresence>
         </div>             
       </div>
     </div>
