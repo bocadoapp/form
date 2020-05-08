@@ -100,7 +100,12 @@ const Intro = () => {
                   key='showRegister'
                   toggleShowRegister={toggleShowRegisterPerf}
                 />
-              : <Login key='showLogin' toggleShowRegister={toggleShowRegisterPerf} />
+              : <Login
+                  key='showLogin'
+                  toggleShowRegister={toggleShowRegisterPerf}
+                  loading={loading}
+                  handleOnlogin={handleOnlogin}                  
+                />
             }
           </AnimatePresence>
         </div>             

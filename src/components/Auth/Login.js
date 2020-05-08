@@ -1,8 +1,9 @@
 import React from 'react'
+import { Button } from '@bocado/ui'
 
 import Wrapper from './Wrapper'
 
-const Login = ({ toggleShowRegister }) => {
+const Login = ({ loading, handleOnlogin, toggleShowRegister }) => {
   return (
     <Wrapper>
       <div className='flex flex-col justify-center bg-gray-100 p-3 rounded-lg shadow-xl'>
@@ -19,6 +20,18 @@ const Login = ({ toggleShowRegister }) => {
           Registrar-me, no tinc compte
         </p>
       </div>
+
+      <div className='flex'>
+        <Button
+          loading={loading}
+          onClick={() => handleOnlogin('facebook')}
+          className='mt-8 items-center text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full'
+          size='sm'
+        >
+          <i className="fab fa-facebook mr-3" />
+          Entra amb Facebook
+        </Button>
+      </div>      
     </Wrapper>
   )
 }
