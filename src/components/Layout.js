@@ -13,20 +13,18 @@ const Layout = ({ children }) => {
   const history = useHistory()
   const { locale } = useIntl()
   const lsUser = getUserFromLS()
-
-
-  const handleMount = useCallback(() => {
+  const handleMount = useCallback(() => {     
     if(lsUser) {
       return setUser(lsUser)
     }
 
-    if (step === 1) {
+    if (step === 1 || !lsUser) {
       return history.push(`/${locale}/1`)
     }
   }, [history, locale, step, lsUser, setUser])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => handleMount(), [])
+  useEffect(() => handleMount(), [step])
 
   return (
     <div className='wrapper'>
