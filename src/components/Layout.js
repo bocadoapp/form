@@ -13,9 +13,7 @@ const Layout = ({ children }) => {
   const history = useHistory()
   const { locale } = useIntl()
   const lsUser = getUserFromLS()
-  const handleMount = useCallback(() => {
-    console.log('useff', lsUser);
-     
+  const handleMount = useCallback(() => {     
     if(lsUser) {
       return setUser(lsUser)
     }
