@@ -90,12 +90,12 @@ const Intro = () => {
         <div className='flex flex-col w-full md:w-1/2 md:ml-5 px-8 md:px-0'>
           <div className='flex flex-col justify-center bg-gray-100 p-3 rounded-lg shadow-xl'>
             <div className='mb-3'>
-              <input type="text" placeholder='Nom i cognoms'/>
+              <input className='input' type="text" placeholder='Nom i cognoms'/>
             </div>
             <div className='mb-3'>
-              <input type="email" placeholder='Correu electrònic'/>
+              <input className='input' type="email" placeholder='Correu electrònic'/>
             </div>
-            <button className='border bg-gray-300 text-gray-500'>
+            <button className='border bg-gray-300 hover:bg-gray-400 text-gray-500'>
               Registrar-me!
             </button>
           </div>
@@ -104,7 +104,7 @@ const Intro = () => {
             <Button
               loading={loading}
               onClick={() => handleOnlogin('facebook')}
-              className='mt-8 items-center text-gray-100 bg-blue-700 rounded-full'
+              className='mt-8 items-center text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full'
               size='sm'
             >
               <i className="fab fa-facebook mr-3" />
