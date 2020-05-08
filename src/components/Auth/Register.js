@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 import { Button } from '@bocado/ui'
 
 import Wrapper from './Wrapper'

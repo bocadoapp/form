@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useQuery, gql } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 import{ FormattedMessage, useIntl } from 'react-intl'
-import { Button } from '@bocado/ui'
 import { AnimatePresence } from 'framer-motion'
 
 import { Register, Login } from '../Auth'
