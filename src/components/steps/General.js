@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import { Field } from 'formik'
+import { Field, useFormikContext } from 'formik'
 import { useDropzone } from 'react-dropzone'
 import { useMutation, gql } from '@apollo/client'
 import { useIntl } from 'react-intl'
 
 import withAnimation from '../../hoc/withAnimation'
+import { useStore } from '../../hooks/useStore'
 
 const UPLOAD_FILE = gql`
   mutation Upload($file: Upload) {
@@ -15,6 +16,8 @@ const UPLOAD_FILE = gql`
 `
 
 const General = () => {
+  const { points, setPoints, btn, setBtn } = useStore()
+  const { values } = useFormikContext()
   const { formatMessage: t } = useIntl()
   const [images, setImages] = useState([])
   const [upload] = useMutation(UPLOAD_FILE)
@@ -27,11 +30,24 @@ const General = () => {
   }, [images, setImages, upload])
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' })
 
-  useEffect(() => () => images.forEach(file => URL.revokeObjectURL(file.preview)), [images])  
+  useEffect(() => images.forEach(file => URL.revokeObjectURL(file.preview)), [images])  
+
+  useEffect(() => {
+    if (values.name && values.name !== '' && btn.disabled) {
+      setPoints(points + 5)
+      setBtn({ disabled: false })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.name])
 
   return (
     <div className='w-full text-gray-600 step-general'>
-      <Field type='text' name='name' placeholder={t({ id: 'recepta.nom.ph' })} className='input text-3xl mb-8' />
+      <Field
+        type='text'
+        name='name'
+        placeholder={t({ id: 'recepta.nom.ph' })}
+        className='input text-3xl mb-8'
+      />
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-8 text-center">
