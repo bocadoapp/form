@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.4ab3fc0d.chunk.css",
-    "main.js": "/static/js/main.49d50155.chunk.js",
-    "main.js.map": "/static/js/main.49d50155.chunk.js.map",
+    "main.js": "/static/js/main.dca8660a.chunk.js",
+    "main.js.map": "/static/js/main.dca8660a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0c3e0371.js",
     "runtime-main.js.map": "/static/js/runtime-main.0c3e0371.js.map",
     "static/css/2.0d3c9e81.chunk.css": "/static/css/2.0d3c9e81.chunk.css",
-    "static/js/2.f9b40c33.chunk.js": "/static/js/2.f9b40c33.chunk.js",
-    "static/js/2.f9b40c33.chunk.js.map": "/static/js/2.f9b40c33.chunk.js.map",
+    "static/js/2.8f5a01e7.chunk.js": "/static/js/2.8f5a01e7.chunk.js",
+    "static/js/2.8f5a01e7.chunk.js.map": "/static/js/2.8f5a01e7.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.a4af2d4317da4bf3f9ca9bb01fc4365c.js": "/precache-manifest.a4af2d4317da4bf3f9ca9bb01fc4365c.js",
+    "precache-manifest.818710bf1de0db312ddc8a967270b0d4.js": "/precache-manifest.818710bf1de0db312ddc8a967270b0d4.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.0d3c9e81.chunk.css.map": "/static/css/2.0d3c9e81.chunk.css.map",
     "static/css/main.4ab3fc0d.chunk.css.map": "/static/css/main.4ab3fc0d.chunk.css.map",
-    "static/js/2.f9b40c33.chunk.js.LICENSE.txt": "/static/js/2.f9b40c33.chunk.js.LICENSE.txt",
+    "static/js/2.8f5a01e7.chunk.js.LICENSE.txt": "/static/js/2.8f5a01e7.chunk.js.LICENSE.txt",
     "static/media/main.css": "/static/media/Jost-Medium.a8e5c855.ttf",
     "static/media/cooker.8d6f6a79.svg": "/static/media/cooker.8d6f6a79.svg",
     "static/media/all.css": "/static/media/fa-solid-900.ec763292.svg",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.0c3e0371.js",
     "static/css/2.0d3c9e81.chunk.css",
-    "static/js/2.f9b40c33.chunk.js",
+    "static/js/2.8f5a01e7.chunk.js",
     "static/css/main.4ab3fc0d.chunk.css",
-    "static/js/main.49d50155.chunk.js"
+    "static/js/main.dca8660a.chunk.js"
   ]
 }
