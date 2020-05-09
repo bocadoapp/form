@@ -1,5 +1,5 @@
-import es from './es'
-import ca from './ca'
+import es from './es.json'
+import ca from './ca.json'
 
 const langs = ['ca', 'es']
 
