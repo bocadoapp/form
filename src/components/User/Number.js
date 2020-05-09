@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useIntl } from 'react-intl'
 
 import { useStore } from '../../hooks/useStore'
 
 const Number = () => {
+  const { formatMessage: t } = useIntl()
   const { points, triggerAnimation } = useStore()
   const [num, setNum] = useState(points)
   const interval = useRef(null)
@@ -41,7 +43,7 @@ const Number = () => {
       transition={{ duration: .5 }}
       className='bocado z-50 items-center justify-center inline-flex text-black w-8 h-8 rounded-full'
     >
-      {num} <span style={{ fontSize: '9px' }}>punts</span>
+      {num} <span style={{ fontSize: '9px' }}>{t({ id: 'punts' })}</span>
     </motion.span>
   )
 }

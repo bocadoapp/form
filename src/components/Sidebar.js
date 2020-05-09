@@ -32,7 +32,7 @@ const Sidebar = () => {
   // const { values } = useFormikContext()
   const { step, btn } = useStore()
   const history = useHistory()
-  const { locale } = useIntl()
+  const { locale, formatMessage: t } = useIntl()
   const lsUser = getUserFromLS()
   const goToNext = useCallback(() => history.push(`/${locale}/${step + 1}`), [locale, step, history])
   const goTo = useCallback(
@@ -61,7 +61,7 @@ const Sidebar = () => {
               >
                 {isFirstStep && lsUser
                   ? <User name={lsUser.username || lsUser.name} />
-                  : <StepInfo icon={icon} name={name} />
+                  : <StepInfo icon={icon} name={t({ id: name })} />
                 }
               </div>
             )
@@ -70,7 +70,9 @@ const Sidebar = () => {
 
         {step > 1 && btn && (
           <div className='absolute bottom-0 left-0 right-0 md:relative flex flex-col md:mt-8 mb-6 md:mb-auto px-4 md:px-auto'>
-            <span className='text-xs text-gray-400 m-auto'>SEGÜENT PAS</span>
+            <span className='text-xs text-gray-400 m-auto uppercase'>
+              {t({ id: 'seguent' })}
+            </span>
             <Button
               disabled={btn.disabled}
               styled={btn.styled}
@@ -78,9 +80,13 @@ const Sidebar = () => {
               onClick={goToNext}
             >
               {btn.icon && btn.icon !== '' ? <i className={cn('mr-3', btn.icon)} /> : null}
-              {btn.label}
+              {t({ id: btn.label })}
             </Button>
-            {btn.disabled && btn.disabledMessage ? <span className='text-xs text-gray-400 m-auto'>{btn.disabledMessage}</span> : null}
+            {btn.disabled && !!btn.disabledMessage && (
+              <span className='text-xs text-gray-400 m-auto'>
+                {t({ id: btn.disabledMessage })}
+              </span>
+            )}
           </div>
         )}
       </div>

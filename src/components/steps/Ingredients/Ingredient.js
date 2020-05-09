@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react'
+import { useIntl } from 'react-intl'
 
 import { useStore } from '../../../hooks/useStore'
 import Input from './Input'
@@ -6,6 +7,7 @@ import { Button } from '@bocado/ui'
 
 function Ingredient (props) {
   const { push } = props
+  const { formatMessage: t } = useIntl()
   const [inputValue, setInputValue] = useState('')
   const [selected, setSelected] = useState(null)
   const { points, setPoints } = useStore()
@@ -33,8 +35,13 @@ function Ingredient (props) {
       <div className="flex flex-col md:flex-row w-full my-4">
         <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4 md:mb-auto'>
           <div className='w-32 flex items-center border-r border-gray-300'>
-            {/* <i className="fas fa-balance-scale-right" /> */}
-            <input ref={refs.qty} type="number" className='p-3 w-full border-0' placeholder='Quantitat' min='0' />
+            <input
+              ref={refs.qty}
+              type="number"
+              className='p-3 w-full border-0'
+              placeholder={t({ id: 'quantitat' })}
+              min='0'
+            />
           </div>
           <div className='w-16 flex items-center border-r border-gray-300'>
             <select className='h-full w-full' ref={refs.unit}>
@@ -50,8 +57,13 @@ function Ingredient (props) {
             />           
           </div>
         </div>
-        <Button type='button' styled='success m-auto md:ml-4' onClick={handleClick} style={{ width: '6rem' }}>
-          Afegir
+        <Button
+          type='button'
+          styled='success m-auto md:ml-4'
+          onClick={handleClick}
+          style={{ width: '6rem' }}
+        >
+          {t({ id: 'add' })}
         </Button>
       </div>
     </div>

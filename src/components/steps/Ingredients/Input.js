@@ -51,21 +51,21 @@ function Wrapper (props) {
 }
 
 function Input ({
-  getLabelProps,
+  // getLabelProps,
   getInputProps,
-  getToggleButtonProps,
+  // getToggleButtonProps,
   getMenuProps,
   getItemProps,
   isOpen,
-  clearSelection,
-  selectedItem,
+  // clearSelection,
+  // selectedItem,
   inputValue,
-  highlightedIndex,
+  // highlightedIndex,
   innerRef
 }) {
-  const { locale } = useIntl()
+  const { locale, formatMessage: t } = useIntl()
   const { loading, data } = useQuery(GET_INGREDIENTS, {
-    skip: !inputValue || inputValue.length <= 3,
+    skip: !inputValue || inputValue.length < 3,
     variables: {
       locale,
       value: inputValue
@@ -76,30 +76,15 @@ function Input ({
     <>
       <i className={cn('fas', loading ? 'fa-circle-notch fa-spin' : 'fa-tag')} />
       <div className='relative w-full' ref={innerRef}>
-        {/* <label {...getLabelProps()}>Find a Star Wars character</label> */}
         <div className='flex'>
           <input
             {...getInputProps({
               // isOpen,
               value: inputValue || '',
-              placeholder: 'Nom ingredient'
+              placeholder: t({ id: 'nom.ingredient' })
             })}
             className='w-full p-2 border-0'
           />
-          {/* {selectedItem ? (
-            <button
-              onClick={clearSelection}
-              aria-label="clear selection"
-              className='w-10'
-            >
-              X
-            </button>
-          ) : (
-            <button {...getToggleButtonProps()} className='w-10'>
-              <ArrowIcon isOpen={isOpen} />
-              ^
-            </button>
-          )} */}
         </div>
         <div style={{position: 'relative'}}>
           {isOpen ? (
