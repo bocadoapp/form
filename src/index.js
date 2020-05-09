@@ -3,16 +3,14 @@ import ReactDOM from 'react-dom'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { createUploadLink } from 'apollo-upload-client'
 import { HashRouter as Router } from 'react-router-dom'
-import { IntlProvider } from 'react-intl';
-import messages, { getLang } from './locale'
 
 import App from './App'
 import { Provider } from './hooks/useStore'
+import Translations from './components/Translations'
 
 import '@fortawesome/fontawesome-free/css/all.css';
 import './styles/main.css'
 
-const locale = getLang()
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: createUploadLink({
@@ -24,13 +22,13 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <IntlProvider locale={locale} messages={messages[locale]}>
-        <Provider>
+      <Provider>
+        <Translations>
           <Router>
             <App />
           </Router>
-        </Provider>      
-      </IntlProvider>
+        </Translations>
+      </Provider>      
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -20,7 +20,7 @@ const Login = ({ loading, handleOnlogin, toggleShowRegister }) => {
         {t({ id: 'login' })}
         </button>
         <p className='cursor-pointer m-0 mx-auto mt-3 text-xs text-gray-400' onClick={toggleShowRegister}>
-          {t({ id: 'login.registre' })}
+          {t({ id: 'login_registre' })}
         </p>
       </div>
 
@@ -32,7 +32,7 @@ const Login = ({ loading, handleOnlogin, toggleShowRegister }) => {
           size='sm'
         >
           <i className="fab fa-facebook mr-3" />
-          {t({ id: 'login.fb' })}
+          {t({ id: 'login_fb' })}
         </Button>
       </div>      
     </Wrapper>

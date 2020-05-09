@@ -38,7 +38,7 @@ function AddStep ({ passos, push }) {
             size='sm'
           >
             <i className="far fa-images mr-3" />
-            {t({ id: 'upload.photo' })}
+            {t({ id: 'upload_photo' })}
           </Button>
           <span className="text-xs text-gray-400 text-center capitalize">
             {t({ id: 'opcional' })}
@@ -60,7 +60,7 @@ function AddStep ({ passos, push }) {
         <textarea
           ref={refs.text}
           className='w-full border border-gray-300 rounded p-3 my-3 h-64 text-gray-700'
-          placeholder={t({ id: 'pas.ph' })}
+          placeholder={t({ id: 'pas_ph' })}
         />
       </div>   
     </div>
