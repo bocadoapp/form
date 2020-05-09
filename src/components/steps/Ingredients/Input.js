@@ -65,7 +65,7 @@ function Input ({
 }) {
   const { locale } = useIntl()
   const { loading, data } = useQuery(GET_INGREDIENTS, {
-    skip: !inputValue || inputValue.length <= 3,
+    skip: !inputValue || inputValue.length < 3,
     variables: {
       locale,
       value: inputValue
