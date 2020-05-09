@@ -26,6 +26,11 @@ function Ingredient (props) {
       ? { ...selected, ...fragment }
       : { type: 'custom', label: inputValue, value: inputValue, ...fragment }
     
+    if (ingredient.label === '' || ingredient.qty === '') {
+      // TOAST NOTIFICATION validation here
+      return
+    }
+
     push(ingredient)
     setPoints(points + 5)
   }, [inputValue, selected, push, refs.qty, refs.unit, points, setPoints])

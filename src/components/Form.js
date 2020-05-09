@@ -7,7 +7,7 @@ const initialValues = {
     name: '',
     email: ''
   },
-  name: 'test',
+  name: '',
   diners: '',
   time: '',
   cooking_time: '',
