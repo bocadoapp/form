@@ -9,12 +9,19 @@ import { useStore } from '../../../hooks/useStore'
 const createMarkup = __html => ({ __html })
 
 function AddStep ({ passos, push }) {
+  const { points, setPoints } = useStore()
   const { formatMessage: t } = useIntl()
   const refs = { text: useRef(null) }
   const handleClick = useCallback(e => {
+    if (refs.text.current.value === '') {
+      // TOAST NOTIFICATION validation here
+      return
+    }
+
+    setPoints(points + 15)
     push({ text: refs.text.current.value })
     refs.text.current.value = ''
-  }, [push, refs.text])
+  }, [points, push, refs.text, setPoints])
 
   return (
     <div className='flex flex-col w-full bg-gray-100 px-4 py-2 rounded mb-4'>
@@ -61,7 +68,7 @@ function AddStep ({ passos, push }) {
 }
 
 const Steps = () => {
-  const { formatMessageL: t } = useIntl()
+  const { formatMessage: t } = useIntl()
   const { setBtn } = useStore()
   const { values: { passos } } = useFormikContext()
 

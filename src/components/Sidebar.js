@@ -53,7 +53,7 @@ const Sidebar = () => {
                 key={`step-${num}`}
                 className={cn(
                   'flex w-full items-center md:px-3 py-4 justify-center lg:justify-start',
-                  isSameStep ? 'text-gray-700' : 'text-gray-400',
+                  isSameStep || isFirstStep ? 'text-gray-700' : 'text-gray-400',
                   isSameStep && 'lg:shadow-md lg:rounded-lg',
                   !isSameStep && !isFirstStep && 'cursor-pointer'
                 )}

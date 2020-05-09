@@ -29,6 +29,7 @@
   "step.passos": "Passos",
   "step.passos.disabled": "Has d'afegir minim 1 ingredient 🙏",
   "step.guardar.disabled": "Has d'afegir minim 1 pas 🙏",
+  "step.ingredients.disabled": "Necessitem un nom per a la reserva!",
   "step.btn.general": "Informació",
   "step.btn.ingredients": "Ingredients",
   "step.btn.passos": "Passos",
