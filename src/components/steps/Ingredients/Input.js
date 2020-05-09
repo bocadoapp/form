@@ -18,15 +18,16 @@ const GET_INGREDIENTS = gql`
 
 function Wrapper (props) {
   const { locale } = useIntl()
-  const stateReducer = (state, changes) => {
+  const { setSelected, setValue, value } = props
+  const stateReducer = (state, changes) => {    
     switch(changes.type) {
       case Downshift.stateChangeTypes.mouseUp: {        
         return {
           ...changes,
-          inputValue: state.inputValue
+          inputValue: value
         }
       }
-      default:
+      default:        
         return changes
     }
   }
@@ -36,14 +37,15 @@ function Wrapper (props) {
   return (
     <Downshift
       stateReducer={stateReducer}
-      onInputValueChange={inputValue => props.setValue(inputValue)}      
-      onChange={selection => props.setSelected({ type: 'db', value: selection._id, label: selection.name[locale] })}
+      onInputValueChange={setValue}
+      onChange={selection => setSelected({ type: 'db', value: selection._id, label: selection.name[locale] })}
       itemToString={itemToString}
     >
       {props => (
         <Input
           {...props}
           {...props.getRootProps({ refKey: 'innerRef', suppressRefError : true })}
+          value={value}
         />
       )}
     </Downshift>
@@ -61,7 +63,8 @@ function Input ({
   // selectedItem,
   inputValue,
   // highlightedIndex,
-  innerRef
+  innerRef,
+  value
 }) {
   const { locale, formatMessage: t } = useIntl()
   const { loading, data } = useQuery(GET_INGREDIENTS, {
@@ -80,7 +83,7 @@ function Input ({
           <input
             {...getInputProps({
               // isOpen,
-              value: inputValue || '',
+              value,
               placeholder: t({ id: 'nom.ingredient' })
             })}
             className='w-full p-2 border-0'
