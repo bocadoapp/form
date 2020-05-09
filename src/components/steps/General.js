@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react'
 import { Field } from 'formik'
 import { useDropzone } from 'react-dropzone'
 import { useMutation, gql } from '@apollo/client'
+import { useIntl } from 'react-intl'
 
 import withAnimation from '../../hoc/withAnimation'
 
@@ -14,6 +15,7 @@ const UPLOAD_FILE = gql`
 `
 
 const General = () => {
+  const { formatMessage: t } = useIntl()
   const [images, setImages] = useState([])
   const [upload] = useMutation(UPLOAD_FILE)
   const onDrop = useCallback(acceptedFiles => {
@@ -29,7 +31,7 @@ const General = () => {
 
   return (
     <div className='w-full text-gray-600 step-general'>
-      <Field type='text' name='name' placeholder='Nom de la recepta' className='input text-3xl mb-8' />
+      <Field type='text' name='name' placeholder={t({ id: 'recepta.nom.ph' })} className='input text-3xl mb-8' />
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-8 text-center">
@@ -38,7 +40,7 @@ const General = () => {
         <Field
           type='number'
           name='diners'
-          placeholder='Numero de començals'
+          placeholder={t({ id: 'recepta.comencals.ph' })}
           className='w-full p-2'
         />
       </div>
@@ -53,9 +55,9 @@ const General = () => {
           min='5'
           step='5'
           name='cooking_time'
-          placeholder='Temps cocció'
+          placeholder={t({ id: 'recepta.temps.ph' })}
         />
-        <span className='text-xs p-2'>minuts</span>
+        <span className='text-xs p-2'>{t({ id: 'minuts' })}</span>
       </div>      
 
       <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
@@ -65,7 +67,7 @@ const General = () => {
         <Field name='cuisine'>
           {({ field }) => (
             <select {...field} className='w-full h-10 bg-white'>
-              <option>Tipus de cuina</option>
+              <option>{t({ id: 'recepta.tipus' })}</option>
               <option>Mediterrànea</option>
               <option>Asiàtica</option>
             </select>
@@ -77,7 +79,7 @@ const General = () => {
         <input {...getInputProps()} />
         <p className='text-center'>
           <i className="far fa-images mr-3 text-3xl" /><br />
-          Arrastra imatges aqui, o be fes click
+          {t({ id: 'upload.text' })}
         </p>
 
         <div className="flex my-3">

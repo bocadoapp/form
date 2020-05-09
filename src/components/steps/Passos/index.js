@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useEffect } from 'react'
 import { FieldArray, useFormikContext } from 'formik'
 import { Button } from '@bocado/ui'
+import { useIntl } from 'react-intl'
 
 import withAnimation from '../../../hoc/withAnimation'
 import { useStore } from '../../../hooks/useStore'
@@ -8,10 +9,8 @@ import { useStore } from '../../../hooks/useStore'
 const createMarkup = __html => ({ __html })
 
 function AddStep ({ passos, push }) {
-  const refs = {
-    text: useRef(null),
-  }
-
+  const { formatMessage: t } = useIntl()
+  const refs = { text: useRef(null) }
   const handleClick = useCallback(e => {
     push({ text: refs.text.current.value })
     refs.text.current.value = ''
@@ -19,8 +18,8 @@ function AddStep ({ passos, push }) {
 
   return (
     <div className='flex flex-col w-full bg-gray-100 px-4 py-2 rounded mb-4'>
-      <h3 className='text-3xl'>
-        Pas {passos.length + 1}
+      <h3 className='text-3xl capitalize'>
+        {t({ id: 'pas' })} {passos.length + 1}
       </h3>
       <div className="flex justify-between my-4">
         <div className='flex flex-col'>
@@ -32,9 +31,11 @@ function AddStep ({ passos, push }) {
             size='sm'
           >
             <i className="far fa-images mr-3" />
-            Pujar foto
+            {t({ id: 'upload.photo' })}
           </Button>
-          <span className="text-xs text-gray-400 text-center">Opcional</span>
+          <span className="text-xs text-gray-400 text-center capitalize">
+            {t({ id: 'opcional' })}
+          </span>
         </div>
         <Button
           type='button'
@@ -45,14 +46,14 @@ function AddStep ({ passos, push }) {
           style={{ width: '6rem' }}
         >
           <i className="fas fa-plus mr-3" />
-          Afegir
+          {t({ id: 'add' })}
         </Button>
       </div>
       <div className='w-full flex'>
         <textarea
           ref={refs.text}
           className='w-full border border-gray-300 rounded p-3 my-3 h-64 text-gray-700'
-          placeholder='Explicació del pas a seguir'
+          placeholder={t({ id: 'pas.ph' })}
         />
       </div>   
     </div>
@@ -60,6 +61,7 @@ function AddStep ({ passos, push }) {
 }
 
 const Steps = () => {
+  const { formatMessageL: t } = useIntl()
   const { setBtn } = useStore()
   const { values: { passos } } = useFormikContext()
 
@@ -82,7 +84,9 @@ const Steps = () => {
                     <div className='flex items-center'>
                       <i className="far fa-times-circle cursor-pointer mr-3" onClick={() => remove(i)} />
                       <h3 className='text-3xl'>
-                        Pas {i + 1}
+                      <span className='capitalize'>
+                        {t({ id: 'pas' })}
+                      </span>{' '}{i + 1}
                       </h3>
                     </div>
                     <p dangerouslySetInnerHTML={createMarkup(text.replace(/\r?\n/g, '<br />'))} />

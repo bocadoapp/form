@@ -1,22 +1,22 @@
 export default [
   {
     num: 1,
-    name: 'Registre',
+    name: 'step.registre',
     icon: 'fas fa-user-plus'
   },
   {
     num: 2,
-    name: 'Informacio general',
+    name: 'step.general',
     icon: 'fas fa-info-circle'
   },
   {
     num: 3,
-    name: 'Ingredients',
+    name: 'step.ingredients',
     icon: 'fas fa-pizza-slice'
   },
   {
     num: 4,
-    name: 'Passos',
+    name: 'step.passos',
     icon: 'fas fa-list-ol'
   }
 ]
