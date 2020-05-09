@@ -1,13 +1,11 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { useIntl } from 'react-intl'
-import { useFormikContext } from 'formik'
 
 import { useStore } from '../../../hooks/useStore'
 import Input from './Input'
 import { Button } from '@bocado/ui'
 
 function Ingredient (props) {
-  const f = useFormikContext()
   const { push } = props
   const { formatMessage: t } = useIntl()
   const [value, setValue] = useState('')
