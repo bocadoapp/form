@@ -1,14 +1,16 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { useIntl } from 'react-intl'
+import { useFormikContext } from 'formik'
 
 import { useStore } from '../../../hooks/useStore'
 import Input from './Input'
 import { Button } from '@bocado/ui'
 
 function Ingredient (props) {
+  const f = useFormikContext()
   const { push } = props
   const { formatMessage: t } = useIntl()
-  const [inputValue, setInputValue] = useState('')
+  const [value, setValue] = useState('')
   const [selected, setSelected] = useState(null)
   const { points, setPoints } = useStore()
   const refs = {
@@ -17,23 +19,26 @@ function Ingredient (props) {
     name: useRef(null)
   }
 
-  const handleClick = useCallback(e => {    
+  const handleClick = useCallback(e => {        
     const fragment = {
       qty: refs.qty.current.value,
       unit: refs.unit.current.selectedOptions[0].value,
     }
     const ingredient = selected
       ? { ...selected, ...fragment }
-      : { type: 'custom', label: inputValue, value: inputValue, ...fragment }
+      : { type: 'custom', label: value, value, ...fragment }
     
     if (ingredient.label === '' || ingredient.qty === '') {
       // TOAST NOTIFICATION validation here
       return
     }
 
+    refs.qty.current.value = ''
     push(ingredient)
     setPoints(points + 5)
-  }, [inputValue, selected, push, refs.qty, refs.unit, points, setPoints])
+    setValue('')
+    setSelected(null)
+  }, [refs.qty, refs.unit, selected, value, push, setPoints, points])
 
   return (
     <div className='flex flex-col w-full'>
@@ -57,8 +62,9 @@ function Ingredient (props) {
           </div>        
           <div className='w-full flex items-center px-2'>
             <Input
-              setValue={setInputValue}
+              setValue={setValue}
               setSelected={setSelected}
+              value={value}
             />           
           </div>
         </div>
