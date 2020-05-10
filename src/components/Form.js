@@ -11,7 +11,7 @@ const initialValues = {
   diners: '',
   time: '',
   cooking_time: '',
-  cuisine: '',
+  // cuisine: '',
   ingredients: [],
   passos: [],
   pics: [],

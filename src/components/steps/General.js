@@ -76,7 +76,7 @@ const General = () => {
         <span className='text-xs p-2'>{t({ id: 'minuts' })}</span>
       </div>      
 
-      <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
+      {/* <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
         <div className="w-8 text-center">
           <i className="fas fa-tag" />
         </div>      
@@ -89,7 +89,7 @@ const General = () => {
             </select>
           )}
         </Field>          
-      </div>
+      </div> */}
 
       <div {...getRootProps()} className='flex flex-col w-full items-center border-4 border-gray-200 border-dashed rounded overflow-hidden'>
         <input {...getInputProps()} />
