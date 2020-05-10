@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { useIntl } from 'react-intl'
 
-import { useStore } from '../../../hooks/useStore'
 import Input from './Input'
 import { Button } from '@bocado/ui'
 
@@ -10,7 +9,6 @@ function Ingredient (props) {
   const { formatMessage: t } = useIntl()
   const [value, setValue] = useState('')
   const [selected, setSelected] = useState(null)
-  const { points, setPoints } = useStore()
   const refs = {
     qty: useRef(null),
     unit: useRef(null),
@@ -33,10 +31,9 @@ function Ingredient (props) {
 
     refs.qty.current.value = ''
     push(ingredient)
-    setPoints(points + 5)
     setValue('')
     setSelected(null)
-  }, [refs.qty, refs.unit, selected, value, push, setPoints, points])
+  }, [refs.qty, refs.unit, selected, value, push])
 
   return (
     <div className='flex flex-col w-full'>

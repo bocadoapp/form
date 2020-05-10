@@ -4,12 +4,10 @@ import { Button } from '@bocado/ui'
 import { useIntl } from 'react-intl'
 
 import withAnimation from '../../../hoc/withAnimation'
-import { useStore } from '../../../hooks/useStore'
 
 const createMarkup = __html => ({ __html })
 
 function AddStep ({ passos, push }) {
-  const { points, setPoints } = useStore()
   const { formatMessage: t } = useIntl()
   const refs = { text: useRef(null) }
   const handleClick = useCallback(e => {
@@ -18,10 +16,9 @@ function AddStep ({ passos, push }) {
       return
     }
 
-    setPoints(points + 15)
     push({ text: refs.text.current.value })
     refs.text.current.value = ''
-  }, [points, push, refs.text, setPoints])
+  }, [push, refs.text])
 
   return (
     <div className='flex flex-col w-full bg-gray-100 px-4 py-2 rounded mb-4'>
