@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { FieldArray, useFormikContext } from 'formik'
 
 import withAnimation from '../../../hoc/withAnimation'
