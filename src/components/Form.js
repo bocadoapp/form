@@ -13,7 +13,7 @@ const initialValues = {
   cooking_time: '',
   // cuisine: '',
   ingredients: [],
-  passos: [{text: 'pas1'}, {text:'pas2'}],
+  passos: [],
   pics: [],
   videos: [],
   picsPerStep: []
