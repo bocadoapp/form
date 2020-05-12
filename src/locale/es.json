@@ -5,7 +5,8 @@
   "seguent": "següent pas",
   "registre": "Registrar-me!",
   "registre_login": "Entrar, ja tinc compte",
-  "registre_fb": "Registrar-me amb Facebook",
+  "registre_fb": "Facebook",
+  "registre_google": "Google",
   "login": "Entrar",
   "login_registre": "Registrar-me, no tinc compte",
   "login_fb": "Entra amb Facebook",
@@ -35,5 +36,9 @@
   "step_btn_general": "Informació",
   "step_btn_ingredients": "Ingredients",
   "step_btn_passos": "Passos",
-  "step_btn_save": "Guardar"
+  "step_btn_save": "Guardar",
+  "thanks": "¡Muchas gracias!",
+  "new_recipie": "Nueva receta",
+  "thanks1": "Comparte este formulario con tus familiares y amigos. Juntos conseguiremos una app con recetas muy variadas.",
+  "thanks2": "Recuerda que creando recetas y compartiendo el formulario tendrás más probabilidades de obtener puntos y ganar un premio. Pronto te revelaremos más información. :)"
 }
