@@ -17,7 +17,7 @@ function Actions ({ isEdit, handleClick, setEditIndex }) {
           style={{ width: '6rem' }}
           onClick={() => setEditIndex(null)}
         >
-          Cancel.lar
+          {t({ id: 'cancel' })}
         </Button>
         <Button
           type='button'
