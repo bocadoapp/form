@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd'
 const createMarkup = __html => ({ __html })
 const PasType = 'step'
 
-function Pas({ text, index, remove, move, id }) {
+function Pas({ text, index, remove, move, id, setEditIndex }) {
   const { formatMessage: t } = useIntl()
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -61,13 +61,16 @@ function Pas({ text, index, remove, move, id }) {
 
   return (
     <div ref={ref} className='flex flex-col py-2 my-2 border-b border-gray-200' style={{ cursor: 'move', opacity }}>
-      <div className='flex items-center'>
-        <i className="far fa-times-circle cursor-pointer mr-3" onClick={() => remove(index)} />
+      <div className='flex justify-between items-center'>
         <h3 className='text-3xl'>
-        <span className='capitalize'>
-          {t({ id: 'pas' })}
-        </span>{' '}{index + 1}
+          <span className='capitalize'>
+            {t({ id: 'pas' })}
+          </span>{' '}{index + 1}
         </h3>
+        <div>
+          <i className="far fa-times-circle cursor-pointer mr-3" onClick={() => remove(index)} />
+          <i className="far fa-edit cursor-pointer mr-3" onClick={() => setEditIndex(index)} />
+        </div>
       </div>
       <p dangerouslySetInnerHTML={createMarkup(text.replace(/\r?\n/g, '<br />'))} />
     </div>

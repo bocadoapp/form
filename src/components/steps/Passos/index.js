@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FieldArray, useFormikContext } from 'formik'
 
 import withAnimation from '../../../hoc/withAnimation'
 import { useStore } from '../../../hooks/useStore'
-import CrearPas from './CrearPas'
+import CrearEditarPas from './CrearEditarPas'
 import Pas from './Pas'
 
 const Passos = () => {
+  const [editIndex, setEditIndex] = useState(null)
   const { setBtn } = useStore()
   const { values: { passos } } = useFormikContext()
 
@@ -22,12 +23,18 @@ const Passos = () => {
         render={({ form: { values }, ...utils }) => {          
           return (
             <>
-              <CrearPas passos={values.passos} push={utils.push} />
+              <CrearEditarPas
+                passos={values.passos}
+                editIndex={editIndex}
+                setEditIndex={setEditIndex}
+                {...utils}
+              />
               {values.passos.map((pas, index) => (
                 <Pas
                   key={`step-${index}`}
                   id={`step-${index}`}
                   index={index}
+                  setEditIndex={setEditIndex}                  
                   {...pas}
                   {...utils}
                 />
