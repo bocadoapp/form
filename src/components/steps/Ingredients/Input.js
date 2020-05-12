@@ -84,7 +84,7 @@ function Input ({
             {...getInputProps({
               // isOpen,
               value,
-              placeholder: t({ id: 'nom.ingredient' })
+              placeholder: t({ id: 'nom_ingredient' })
             })}
             className='w-full p-2 border-0'
           />

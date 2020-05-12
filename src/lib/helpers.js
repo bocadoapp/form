@@ -1,10 +1,10 @@
 const LS_KEY = 'bocado_user'
 const btnSteps = [
   {},
-  { disabled: false, styled: 'gradient', label: 'step.btn.general', icon: 'fas fa-info-circle' },
-  { disabled: true, styled: 'gradient', label: 'step.btn.ingredients', icon: 'fas fa-carrot', disabledMessage: 'step.ingredients.disabled' },
-  { disabled: true, styled: 'gradient', label: 'step.btn.passos', icon: 'fas fa-list-ol', disabledMessage: 'step.passos.disabled' },
-  { disabled: false, styled: 'success', label: 'step.btn.save', icon: 'far fa-save', disabledMessage: 'step.guardar.disabled' }
+  { disabled: false, styled: 'gradient', label: 'step_btn_general', icon: 'fas fa-info-circle' },
+  { disabled: true, styled: 'gradient', label: 'step_btn_ingredients', icon: 'fas fa-carrot', disabledMessage: 'step_ingredients_disabled' },
+  { disabled: true, styled: 'gradient', label: 'step_btn_passos', icon: 'fas fa-list-ol', disabledMessage: 'step_passos_disabled' },
+  { disabled: false, styled: 'success', label: 'step_btn_save', icon: 'far fa-save', disabledMessage: 'step_guardar_disabled' }
 ]
 
 export const getBtnData = step =>  btnSteps[step]
