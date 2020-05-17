@@ -16,7 +16,7 @@ function App() {
   const history = useHistory()
   const exitBeforeEnter = history.action === 'PUSH'
   
-  history.listen((location, action) => {
+  history.listen((location, action) => {    
     const step = Number(location.pathname.split('/').pop())
     if (step && !isNaN(step)) {
       setStep(step)
