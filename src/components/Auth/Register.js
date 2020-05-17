@@ -24,16 +24,27 @@ const Register = ({ loading, handleOnlogin, toggleShowRegister }) => {
         </p>
       </div>
 
+      <p className='text-xs text-gray-400 text-center'>o bé registra't amb</p>
+
       <div className='flex'>
         <Button
           loading={loading}
           onClick={() => handleOnlogin('facebook')}
-          className='mt-8 items-center text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full'
+          className='items-center text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-r'
           size='sm'
         >
           <i className="fab fa-facebook mr-3" />
           {t({ id: 'registre_fb' })}
         </Button>
+        <Button
+          loading={loading}
+          onClick={() => handleOnlogin('google')}
+          className='items-center text-gray-100 bg-red-600 hover:bg-red-700 rounded-l'
+          size='sm'
+        >
+          <i className="fab fa-google mr-3" />
+          {t({ id: 'registre_google' })}
+        </Button>        
       </div>
     </Wrapper>
   )
