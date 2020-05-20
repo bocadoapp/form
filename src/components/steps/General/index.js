@@ -4,8 +4,9 @@ import { useDropzone } from 'react-dropzone'
 import { useMutation, gql } from '@apollo/client'
 import { useIntl } from 'react-intl'
 
-import withAnimation from '../../hoc/withAnimation'
-import { useStore } from '../../hooks/useStore'
+import CookingTime from './CookingTime'
+import withAnimation from '../../../hoc/withAnimation'
+import { useStore } from '../../../hooks/useStore'
 
 const UPLOAD_FILE = gql`
   mutation Upload($file: Upload) {
@@ -61,35 +62,12 @@ const General = () => {
         />
       </div>
 
-      <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
+      <div className='flex mb-5 w-full border border-gray-300 rounded overflow-hidden py-2'>
         <div className="w-8 text-center">
           <i className="fas fa-stopwatch" />
         </div>
-        <Field
-          className='w-full p-2'
-          type='number'
-          min='5'
-          step='5'
-          name='cooking_time'
-          placeholder={t({ id: 'recepta_temps_ph' })}
-        />
-        <span className='text-xs p-2'>{t({ id: 'minuts' })}</span>
+        <Field name='cooking_time' component={CookingTime} />
       </div>      
-
-      {/* <div className='flex items-center mb-5 w-full border border-gray-300 rounded overflow-hidden'>
-        <div className="w-8 text-center">
-          <i className="fas fa-tag" />
-        </div>      
-        <Field name='cuisine'>
-          {({ field }) => (
-            <select {...field} className='w-full h-10 bg-white'>
-              <option>{t({ id: 'recepta_tipus' })}</option>
-              <option>Mediterrànea</option>
-              <option>Asiàtica</option>
-            </select>
-          )}
-        </Field>          
-      </div> */}
 
       <div {...getRootProps()} className='flex flex-col w-full items-center border-4 border-gray-200 border-dashed rounded overflow-hidden'>
         <input {...getInputProps()} />
