@@ -5,7 +5,8 @@ import { createUploadLink } from 'apollo-upload-client'
 import { HashRouter as Router } from 'react-router-dom'
 
 import App from './App'
-import { Provider } from './hooks/useStore'
+import { Provider as StoreProvider } from './hooks/useStore'
+import { Provider as GtmProvider } from './hooks/useGtm'
 import Translations from './components/Translations'
 
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -22,13 +23,15 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <Provider>
-        <Translations>
-          <Router>
-            <App />
-          </Router>
-        </Translations>
-      </Provider>      
+      <StoreProvider>
+        <GtmProvider>
+          <Translations>
+            <Router>
+              <App />
+            </Router>
+          </Translations>
+        </GtmProvider>
+      </StoreProvider>      
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
