@@ -25,7 +25,8 @@
     "react-gtm-module": "^2.0.8",
     "react-intl": "^4.4.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-share": "^4.1.0"
   },
   "scripts": {
     "start": "run-p watch:css start:react",
