@@ -2,6 +2,15 @@ import React from 'react'
 import { Formik, Form as FormikForm } from 'formik'
 import cn from 'classnames'
 
+/**
+ * Cooking time
+ * 1- <15
+ * 2- 15-30
+ * 3- 30-45
+ * 4- 56-60
+ * 5- +60
+ */
+
 const initialValues = {
   user: {
     name: '',
@@ -10,7 +19,7 @@ const initialValues = {
   name: '',
   diners: '',
   time: '',
-  cooking_time: '',
+  cooking_time: 3,
   // cuisine: '',
   ingredients: [],
   passos: [],
