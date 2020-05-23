@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
       return setUser(lsUser)
     }
 
-    if (step === 1 || !lsUser) {
+    if (step !== 1 && !lsUser) {      
       return history.push(`/${locale}/1`)
     }
   }, [history, locale, step, lsUser, setUser])
