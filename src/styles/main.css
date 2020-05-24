@@ -10976,6 +10976,10 @@ input.input, button {
   width: 100%;
 }
 
+input.input.error, button.error {
+  border-color: #feb2b2;
+}
+
 .menu a:not(:last-child) {
   margin-right: 1rem;
 }
