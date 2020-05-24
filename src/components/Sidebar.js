@@ -60,7 +60,7 @@ const Sidebar = () => {
                 onClick={() => !isFirstStep && !isSameStep && goTo(num)}
               >
                 {isFirstStep && lsUser
-                  ? <User name={lsUser.username || lsUser.name} />
+                  ? <User name={lsUser.name || lsUser.username} />
                   : <StepInfo icon={icon} name={t({ id: name })} />
                 }
               </div>
