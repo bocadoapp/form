@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useReducer } from 'react'
-import { getBtnData, getInitialStep } from '../lib/helpers'
+import { LS_KEY, getBtnData, getInitialStep } from '../lib/helpers'
 import { LS_LANG_KEY, getLocale } from '../locale'
 
 const Context = createContext()
@@ -11,11 +11,17 @@ const initialState = {
   btn: getBtnData(initialStep),
   triggerAnimation: false,
   points: 0,
-  locale: getLocale()
+  locale: getLocale(),
+  status: {
+    error: false,
+    text: null
+  }
 }
 
 function reducer (state = initialState, action) {
   switch (action.type) {
+    case 'SET_STATUS':
+      return { ...state, status: { ...state.status, ...action.status } }
     case 'SET_STEP':
       return {
         ...state,
@@ -52,14 +58,18 @@ export function useStore () {
   const setLocale = locale => {
     window.localStorage.setItem(LS_LANG_KEY, locale)
     dispatch({ type: 'SET_LOCALE', locale })
-  } 
+  }
+  const setStatus = status => dispatch({ type: 'SET_STATUS', status })
   const setStep = step => dispatch({ type: 'SET_STEP', step })
-  const setUser = user => dispatch({ type: 'SET_USER', user })
+  const setUser = user => {
+    window.localStorage.setItem(LS_KEY, JSON.stringify(user))
+    dispatch({ type: 'SET_USER', user })
+  }
   const setBtn = btn => dispatch({ type: 'SET_BUTTON', btn })
   const setPoints = (points, withAnimation = true) => dispatch({ type: 'SET_POINTS', points, withAnimation })
   const toggleAnimation = (value, cb) => {
     dispatch({ type: 'TOGGLE_ANI', value })
     if (cb) cb()
   }
-  return {...state, setLocale, setStep, setUser, setBtn, toggleAnimation, setPoints }
+  return {...state, setStatus, setLocale, setStep, setUser, setBtn, toggleAnimation, setPoints }
 }
