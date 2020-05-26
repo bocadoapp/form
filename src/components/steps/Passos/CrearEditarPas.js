@@ -1,75 +1,43 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { Button } from '@bocado/ui'
 
-function Actions ({ isEdit, handleClick, setEditIndex }) {
-  const { formatMessage: t } = useIntl()
-  const btnMsg = isEdit ? 'edit' : 'add'
+import Upload from '../../Upload'
+import Actions from './CrearEditarPasActions'
 
-  if (isEdit) {
-    return (
-      <div className="inline-flex">
-        <Button
-          type='button'
-          className='items-center mb-auto rounded-r'
-          styled='default'
-          size='sm'
-          style={{ width: '6rem' }}
-          onClick={() => setEditIndex(null)}
-        >
-          {t({ id: 'cancel' })}
-        </Button>
-        <Button
-          type='button'
-          className='items-center mb-auto rounded-l'
-          styled='success'
-          onClick={handleClick}
-          size='sm'
-          style={{ width: '6rem' }}
-        >
-          <i className="fas fa-plus mr-3" />
-          {t({ id: btnMsg })}
-        </Button>          
-      </div>
-    )
-  }
-
-  return (
-    <Button
-      type='button'
-      className='items-center mb-auto'
-      styled='success'
-      onClick={handleClick}
-      size='sm'
-      style={{ width: '6rem' }}
-    >
-      <i className="fas fa-plus mr-3" />
-      {t({ id: btnMsg })}
-    </Button> 
-  )
-}
+const defaultValues = { text: '', media: [] }
 
 function CrearEditarPas ({ passos, push, replace, editIndex, setEditIndex }) {
   const { formatMessage: t } = useIntl()
-  const ref = useRef(null)
   const isEdit = !(editIndex === null)
+  const text = isEdit ? passos[editIndex].text : ''
+  const [pas, updatePas] = useState({ ...defaultValues, text })
 
   const handleClick = useCallback(e => {
-    if (ref.current.value === '') {
+    if (pas.text === '') {
       // TOAST NOTIFICATION validation here
       return
     }
-
-    const pas = { text: ref.current.value }    
 
     if (!isEdit) {
       push(pas)
     } else {
       replace(editIndex, pas)
     }
+
     setEditIndex(null)
-    ref.current.value = ''
-  }, [ref, editIndex, setEditIndex, push, replace, isEdit])
+    updatePas(defaultValues)
+  }, [pas, editIndex, setEditIndex, push, replace, isEdit])
+
+  const updatePasImages = useCallback((response) => {
+    updatePas({ ...pas, media: [...pas.media, ...response.data.upload]})
+  }, [pas])
+
+  useEffect(() => {
+    if (isEdit) {
+      updatePas({ ...passos[editIndex] })
+    }
+  }, [editIndex, isEdit, passos])
 
   return (
     <div className='flex flex-col w-full bg-gray-100 px-4 py-2 rounded mb-4'>
@@ -77,29 +45,63 @@ function CrearEditarPas ({ passos, push, replace, editIndex, setEditIndex }) {
         {t({ id: 'pas' })} {isEdit ? editIndex + 1 : passos.length + 1}
       </h3>
       <div className="flex justify-between my-4">
-        <div className='flex flex-col'>
-          <Button
-            type='button'
-            className='w-32 items-center'
-            styled='default'
-            size='sm'
-          >
-            <i className="far fa-images mr-3" />
-            {t({ id: 'upload_photo' })}
-          </Button>
-          <span className="text-xs text-gray-400 text-center capitalize">
-            {t({ id: 'opcional' })}
-          </span>
-        </div>
+          <Upload afterUpload={updatePasImages}>
+            {({
+              loading,
+              getRootProps,
+              getInputProps              
+            }) => (
+              <>
+                <div className='flex flex-col'>
+                  <div {...getRootProps()}>
+                    <Button
+                      type='button'
+                      className='w-32 items-center'
+                      styled='default'
+                      size='sm'
+                      loading={loading}
+                      disabled={loading}
+                    >
+                      <input {...getInputProps()} />
+                      <i className="far fa-images mr-3" />
+                      {t({ id: 'upload_photo' })}
+                    </Button>
+                  </div>
+                  <span className="text-xs text-gray-400 text-center capitalize">
+                    {t({ id: 'opcional' })}
+                  </span>              
+                </div>
+                <Actions isEdit={isEdit} handleClick={handleClick} setEditIndex={setEditIndex} {...pas} loading={loading} />
+              </>
+            )}
+          </Upload>
 
-        <Actions isEdit={isEdit} handleClick={handleClick} setEditIndex={setEditIndex} />
       </div>
+
+      {!!pas.media.length && (
+        <div className='w-full flex'>
+          {pas.media.map(m => (
+            <div
+              key={m.name || m.path}
+              className='inline-flex rounded-md border border-gray-300 w-20 h-20 box-border overflow-hidden mr-3 flex-shrink-0'
+            >
+              <div
+                className='flex min-w-0 w-full relative justify-center items-center'
+                style={{
+                  backgroundImage: `url(${m.url})`,
+                  backgroundSize: 'cover'
+                }} />
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className='w-full flex'>
         <textarea
-          ref={ref}
           className='w-full border border-gray-300 rounded p-3 my-3 h-64 text-gray-700'
           placeholder={t({ id: 'pas_ph' })}
-          defaultValue={isEdit ? passos[editIndex].text : ''}
+          value={pas.text}
+          onChange={e => updatePas({ ...pas, text: e.target.value })}
         />
       </div>   
     </div>
