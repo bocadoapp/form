@@ -1,4 +1,4 @@
-const LS_KEY = 'bocado_user'
+export const LS_KEY = 'bocado_user'
 const btnSteps = [
   {},
   { disabled: false, styled: 'gradient', label: 'step_btn_general', icon: 'fas fa-info-circle' },
@@ -28,3 +28,24 @@ export const getUserFromLS = () => {
 export const r = () => Math.floor(Math.random() * (50 - 1 + 1) + 1)
 export const emojis = ['🥕', '🍅', '🥬', '🌽', '🍆', '🥭', '🥥', '🥝', '🍓', '🍒', '🍑', '🍐', '🍏', '🍎', '🍍', '🍌', '🍋', '🍊', '🍉', '🍈', '🍇']
 export const random = (min, max) => Math.random() * (max - min + 1) + min
+
+export const ERRORS = {
+  11000: 'errors.duplicated.user'
+}
+
+export const getErrorMessage = error => {
+  if (error.graphQLErrors && error.graphQLErrors.length) {    
+    return error.graphQLErrors
+      .map(err => {
+        const { message, extensions } = err        
+        return ERRORS[extensions.exception.code] || extensions.exception.errmsg || message
+      })
+      .join('<br />')
+  }
+
+  if (error.message && error.message !== '') {
+    return error.message
+  }
+
+  return error.toString()
+}

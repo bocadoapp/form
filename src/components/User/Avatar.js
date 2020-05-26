@@ -8,7 +8,7 @@ const Avatar = () => {
     return null
   }
 
-  const initials = user.name.split(' ').map(w => w.slice(0, 1)).join('').slice(0, 2)  
+  const initials = user.name.trim().split(' ').map(w => w.slice(0, 1).toUpperCase()).join('').slice(0, 2)  
 
   return (
     <div className='w-10 h-10 rounded-full overflow-hidden shadow-lg'>
@@ -29,7 +29,9 @@ const Avatar = () => {
                 </linearGradient>
             </defs>            
             <circle id='avatar' cx='50' cy='50' r='50' />
-            <text x="50%" y="50%" dominantBaseline="middle" textAnchor='middle' fontSize='3rem' fill="white">{initials}</text>
+            <text x="50%" y="50%" dominantBaseline="middle" textAnchor='middle' fontSize='3rem' fill="white">
+              {initials}
+            </text>
           </svg>
         )
       }
