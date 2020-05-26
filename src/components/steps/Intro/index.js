@@ -56,9 +56,7 @@ const Intro = () => {
   const errMessage = qs.get('errMessage')
 
   useEffect(() => {
-    console.log('entro useEffect', loading, data, user, tokenQs, errCode, errMessage)
     if (!user && !loading && data) {
-      console.log('entro 1');
       saveAndGoToStep2(data.user)
     } else if (!user && tokenQs) {
       setToken(tokenQs)
