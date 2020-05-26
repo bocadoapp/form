@@ -5,6 +5,7 @@ import { LS_LANG_KEY, getLocale } from '../locale'
 const Context = createContext()
 const initialStep = getInitialStep()
 const initialState = {
+  recipeNamePoints: false,
   step: initialStep,
   numSteps: 4,
   user: null,
@@ -36,10 +37,12 @@ function reducer (state = initialState, action) {
       return { ...state, triggerAnimation: action.value }
     case 'SET_POINTS': {
       const triggerAnimation = action.withAnimation ? !state.withAnimation : state.withAnimation
-      return { ...state, points: action.points, triggerAnimation }
+      return { ...state, points: state.points + action.points, triggerAnimation }
     }
     case 'SET_LOCALE':
       return { ...state, locale: action.locale }
+    case 'SET_RECIPE_NAME_POINTS':
+      return { ...state, recipeNamePoints: true }
     default:
       return {...state}
   }
@@ -55,6 +58,7 @@ export function Provider ({ children }) {
 
 export function useStore () {
   const [state, dispatch] = useContext(Context)
+  const setRecipeNamePoints = () => dispatch({ type: 'SET_RECIPE_NAME_POINTS' })
   const setLocale = locale => {
     window.localStorage.setItem(LS_LANG_KEY, locale)
     dispatch({ type: 'SET_LOCALE', locale })
@@ -71,5 +75,5 @@ export function useStore () {
     dispatch({ type: 'TOGGLE_ANI', value })
     if (cb) cb()
   }
-  return {...state, setStatus, setLocale, setStep, setUser, setBtn, toggleAnimation, setPoints }
+  return {...state, setRecipeNamePoints, setStatus, setLocale, setStep, setUser, setBtn, toggleAnimation, setPoints }
 }
