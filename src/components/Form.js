@@ -12,20 +12,12 @@ import cn from 'classnames'
  */
 
 const initialValues = {
-  user: {
-    name: '',
-    email: ''
-  },
   name: '',
-  diners: '',
-  time: '',
+  diners: 4,
   cooking_time: 3,
-  // cuisine: '',
   ingredients: [],
   passos: [],
-  pics: [],
-  videos: [],
-  picsPerStep: []
+  media: []
 }
 
 const Form = ({ children, className }) => {

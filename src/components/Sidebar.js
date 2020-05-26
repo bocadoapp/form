@@ -35,9 +35,9 @@ const Sidebar = () => {
   const { locale, formatMessage: t } = useIntl()
   const lsUser = getUserFromLS()
   const goToNext = useCallback(() => history.push(`/${locale}/${step + 1}`), [locale, step, history])
-  const goTo = useCallback(
-    stepParam => history.push(`/${locale}/${stepParam || (step + 1)}`),
-    [history, locale, step]
+  const goTo = useCallback(    
+    stepParam => lsUser && history.push(`/${locale}/${stepParam || (step + 1)}`),
+    [history, locale, step, lsUser]
   )
 
   return (
@@ -60,7 +60,7 @@ const Sidebar = () => {
                 onClick={() => !isFirstStep && !isSameStep && goTo(num)}
               >
                 {isFirstStep && lsUser
-                  ? <User name={lsUser.username || lsUser.name} />
+                  ? <User name={lsUser.name || lsUser.username} />
                   : <StepInfo icon={icon} name={t({ id: name })} />
                 }
               </div>

@@ -8,7 +8,7 @@ const withAnimation = ({ arrows = false } = {}) => Component => props => (
     exit={{ opacity: 0 }}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    className='flex w-full'
+    className='flex w-full overflow-hidden'
   >
     <Component {...props} />
     {arrows && <Arrows />}
