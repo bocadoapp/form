@@ -23,7 +23,7 @@ const initialValues = {
   // cuisine: '',
   ingredients: [],
   passos: [],
-  pics: [],
+  media: [],
   videos: [],
   picsPerStep: []
 }
