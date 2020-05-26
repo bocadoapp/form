@@ -4,10 +4,12 @@ import { Button } from '@bocado/ui'
 
 import Upload from '../../Upload'
 import Actions from './CrearEditarPasActions'
+import { useStore } from '../../../hooks/useStore'
 
 const defaultValues = { text: '', media: [] }
 
 function CrearEditarPas ({ passos, push, replace, editIndex, setEditIndex }) {
+  const { setPoints } = useStore()
   const { formatMessage: t } = useIntl()
   const isEdit = !(editIndex === null)
   const text = isEdit ? passos[editIndex].text : ''
@@ -29,7 +31,11 @@ function CrearEditarPas ({ passos, push, replace, editIndex, setEditIndex }) {
     updatePas(defaultValues)
   }, [pas, editIndex, setEditIndex, push, replace, isEdit])
 
-  const updatePasImages = useCallback((response) => {
+  const beforeUpload = useCallback(({ files }) => {
+    setPoints(files.length * 150)
+  }, [setPoints])
+
+  const afterUpload = useCallback((response) => {
     updatePas({ ...pas, media: [...pas.media, ...response.data.upload]})
   }, [pas])
 
@@ -45,7 +51,7 @@ function CrearEditarPas ({ passos, push, replace, editIndex, setEditIndex }) {
         {t({ id: 'pas' })} {isEdit ? editIndex + 1 : passos.length + 1}
       </h3>
       <div className="flex justify-between my-4">
-          <Upload afterUpload={updatePasImages}>
+          <Upload afterUpload={afterUpload} beforeUpload={beforeUpload}>
             {({
               loading,
               getRootProps,
