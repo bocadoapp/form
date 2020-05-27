@@ -38,9 +38,9 @@ function Ingredient (props) {
 
   return (
     <div className='flex flex-col w-full'>
-      <div className="flex flex-col md:flex-row w-full my-4">
-        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4 md:mb-auto'>
-          <div className='w-32 flex items-center border-r border-gray-300'>
+      <div className="flex flex-col w-full my-4">
+        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4'>
+          <div className='w-full flex items-center border-r border-gray-300'>
             <input
               ref={refs.qty}
               type="number"
@@ -55,7 +55,9 @@ function Ingredient (props) {
               <option value="kg">kg</option>
               <option value="ml">ml</option>
             </select>
-          </div>        
+          </div>
+        </div>
+        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4'>
           <div className='w-full flex items-center px-2'>
             <Input
               setValue={setValue}
@@ -66,7 +68,7 @@ function Ingredient (props) {
         </div>
         <Button
           type='button'
-          styled='success m-auto md:ml-4'
+          styled='success m-auto md:ml-0'
           onClick={handleClick}
           style={{ width: '6rem' }}
         >
