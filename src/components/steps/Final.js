@@ -28,7 +28,7 @@ const Final = () => {
 
       <Button styled='gradient' className='w-64 m-auto'>
         {t({ id: 'new_recipie' })}
-      </Button>      
+      </Button>
     </div>
   )
 }
