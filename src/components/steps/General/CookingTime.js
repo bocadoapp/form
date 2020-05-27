@@ -17,12 +17,17 @@ const CookingTime = ({ form: { setFieldValue, values } }) => {
   
   return (
     <div className='w-full'>
-      <p className='mt-0'>Temps de cocció</p>
+      <div className="flex">
+        <div className="w-8 text-center">
+          <i className="fas fa-stopwatch" />
+        </div>      
+        <p className='mt-0'>Temps de cocció</p>
+      </div>
       <div className='flex flex-col md:flex-row w-full md:w-auto justify-center'>
         {Object.keys(TIMES).map(index => (
           <label
             key={`time-${index}`}
-            className={cn(labelBaseClassnames, index < 5 && 'mr-4')}
+            className={cn(labelBaseClassnames, index < 5 && 'mx-2')}
           >
             <Radio
               name='inner_cooking_time'
@@ -30,7 +35,7 @@ const CookingTime = ({ form: { setFieldValue, values } }) => {
               onChange={handleOnChange}
               data-index={index}
             />
-            <span className='ml-2'>{TIMES[index]}</span>
+            <span className='mx-2'>{TIMES[index]}</span>
           </label>
         ))}                                  
       </div>
