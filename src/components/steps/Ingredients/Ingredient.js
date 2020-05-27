@@ -3,9 +3,11 @@ import { useIntl } from 'react-intl'
 
 import Input from './Input'
 import { Button } from '@bocado/ui'
+import { useStore } from '../../../hooks/useStore'
 
 function Ingredient (props) {
   const { push } = props
+  const { setStatus } = useStore()
   const { formatMessage: t } = useIntl()
   const [value, setValue] = useState('')
   const [selected, setSelected] = useState(null)
@@ -25,15 +27,14 @@ function Ingredient (props) {
       : { type: 'custom', label: value, value, ...fragment }
     
     if (ingredient.label === '' || ingredient.qty === '') {
-      // TOAST NOTIFICATION validation here
-      return
+      return setStatus({ error: true, text: 'ingredient.validation.error' })
     }
 
     refs.qty.current.value = ''
     push(ingredient)
     setValue('')
     setSelected(null)
-  }, [refs.qty, refs.unit, selected, value, push])
+  }, [refs.qty, refs.unit, selected, value, push, setStatus])
 
   return (
     <div className='flex flex-col w-full'>
