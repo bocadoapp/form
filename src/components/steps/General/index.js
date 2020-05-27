@@ -2,16 +2,27 @@ import React, { useCallback } from 'react'
 import { Field, useFormikContext } from 'formik'
 import { useIntl } from 'react-intl'
 import cn from 'classnames'
+import { useMutation, gql } from '@apollo/client'
 
 import Upload from '../../Upload'
 import CookingTime from './CookingTime'
 import withAnimation from '../../../hoc/withAnimation'
 import { useStore } from '../../../hooks/useStore'
+import RemoveImage from '../../RemoveImage'
+
+const DELETE_FILE = gql`
+  mutation DeleteFile($id: MongoID!) {
+    fileRemove(filter: { _id: $id }) {
+      recordId
+    }
+  }
+`
 
 const General = () => {
   const { setRecipeNamePoints, recipeNamePoints, setPoints, btn, setBtn } = useStore()
   const { values, setFieldValue } = useFormikContext()
   const { formatMessage: t } = useIntl()
+  const [remove] = useMutation(DELETE_FILE)
 
   const addPoints = useCallback(() => {
     if (!recipeNamePoints && values.name && values.name !== '' && btn.disabled) {
@@ -32,6 +43,20 @@ const General = () => {
   const afterUpload = useCallback(response => {
     setFieldValue('media', [ ...values.media, ...response.data.upload ])    
   }, [setFieldValue, values.media])
+
+  const onRemove = useCallback((index, previews, setPreviews) => {    
+    const newPreviews = [...previews]
+    newPreviews.splice(index, 1)
+    const newMedia = [...values.media]
+    const [removed] = newMedia.splice(index, 1)
+
+    setPoints(-150)
+    setPreviews(newPreviews)    
+    setFieldValue('media', newMedia)
+    remove({ variables: { id: removed._id }})
+      .then(response => console.log('done', response))
+      .catch(err => console.log('err', err))    
+  }, [remove, setFieldValue, setPoints, values.media])
 
   return (
     <div className='w-full text-gray-600 step-general'>
@@ -66,6 +91,7 @@ const General = () => {
         {({
           loading,
           previews,
+          setPreviews,
           getRootProps,
           getInputProps
         }) => (
@@ -76,7 +102,7 @@ const General = () => {
                   {previews.map((file, i) => {
                     const isLoading = loading && (i + 1 >= previews.length - values.media.length)              
                     return (
-                      <div key={file.name || file.path} className={cn('pic mr-3 flex-shrink-0')}>
+                      <div key={file.name || file.path} className={cn('pic mr-3 flex-shrink-0 relative')}>
                         <div
                           className='pic-inner w-full relative justify-center items-center'
                           style={{
@@ -86,6 +112,7 @@ const General = () => {
                             {isLoading && <div className='absolute w-full h-full opacity-50 bg-white flex items-center justify-center' />}
                             {isLoading && <span className='relative'>...Loading</span>}
                           </div>
+                          <RemoveImage onRemove={() => onRemove(i, previews, setPreviews)}  />
                       </div>
                     )
                   })}
