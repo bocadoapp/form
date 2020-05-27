@@ -91,19 +91,23 @@ const General = () => {
           setPreviews,
           getRootProps,
           getInputProps
-        }) => (
+        }) => {
+          const showPreviews = (previews && previews.length) || (values.media && values.media.length)
+          const imgs = previews && previews.length ? previews : values.media
+
+          return (
           <>
-            {!!previews && !!previews.length && (
+            {!!showPreviews && (
               <div className="flex my-3 w-full overflow-x-hidden max-w-full">
                 <div className="flex overflow-x-scroll">
-                  {previews.map((file, i) => {
+                  {imgs.map((file, i) => {
                     const isLoading = loading && (i + 1 >= previews.length - values.media.length)              
                     return (
                       <div key={file.name || file.path} className={cn('pic mr-3 flex-shrink-0 relative')}>
                         <div
                           className='pic-inner w-full relative justify-center items-center'
                           style={{
-                            backgroundImage: `url(${file.preview})`,
+                            backgroundImage: `url(${file.preview || file.url})`,
                             backgroundSize: 'cover'
                           }}>
                             {isLoading && <div className='absolute w-full h-full opacity-50 bg-white flex items-center justify-center' />}
@@ -124,7 +128,7 @@ const General = () => {
               </p>      
             </div>         
           </>
-        )}
+        )}}
       </Upload>
     </div>
   )
