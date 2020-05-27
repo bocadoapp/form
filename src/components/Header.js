@@ -50,7 +50,7 @@ const Navbar = () => {
 
   return (
   // px-4 md:px-auto lg:flex-row w-full lg:max-w-screen-md lg:max-w-screen-lg m-auto
-    <nav className='flex bg-white sticky top-0 md:flex-row justify-end items-center w-full py-3 px-4 md:px-auto mb-10 lg:max-w-screen-md lg:max-w-screen-lg m-auto'>
+    <nav className='flex bg-white sticky top-0 md:flex-row justify-end items-center w-full py-3 px-4 md:px-auto lg:max-w-screen-md lg:max-w-screen-lg m-auto'>
         <div className="flex ml-auto mr-auto">
           <Link to="/" >
             <figure>
