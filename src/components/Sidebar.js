@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import cn from 'classnames'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
+import { useFormikContext } from 'formik'
 
 import { useStore } from '../hooks/useStore'
 import steps from '../lib/steps'
@@ -29,6 +30,7 @@ const StepInfo = ({ icon, name }) => {
 }
 
 const Sidebar = () => {
+  const { values } = useFormikContext()
   const { step } = useStore()
   const history = useHistory()
   const { locale, formatMessage: t } = useIntl()
@@ -37,6 +39,27 @@ const Sidebar = () => {
     stepParam => lsUser && history.push(`/${locale}/${stepParam || (step + 1)}`),
     [history, locale, step, lsUser]
   )
+
+  const canChange = useCallback(num => {
+    let canExit = false
+    let canEnter = false
+    
+    if (num < step) {
+      canExit = true
+      canEnter = true
+    } else {
+      canEnter = true
+      if (step === 2) {
+        canExit = !!(values.name && values.name !== '')
+      } else if (step === 3) {
+        canExit = !!(values.ingredients && values.ingredients.length)
+      } else if (step === 4) {
+        canExit = !!(values.passos && values.passos.length)
+      }
+    }
+    
+    return canExit && canEnter
+  }, [step, values])
 
   return (
     <aside className='w-full lg:max-w-xs flex md:mr-10'>
@@ -57,7 +80,7 @@ const Sidebar = () => {
                   isSameStep && 'lg:shadow-md lg:rounded-lg',
                   !isSameStep && !isFirstStep && 'cursor-pointer'
                 )}
-                onClick={() => !isFirstStep && !isSameStep && goTo(num)}
+                onClick={() => !isFirstStep && !isSameStep && canChange(num) && goTo(num)}
               >
                 {isFirstStep && lsUser
                   ? <User name={lsUser.name || lsUser.username} />
