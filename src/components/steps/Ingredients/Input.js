@@ -83,7 +83,7 @@ function Input ({
           <input
             {...getInputProps({
               // isOpen,
-              value,
+              value: value || '',
               placeholder: t({ id: 'nom_ingredient' })
             })}
             className='w-full p-2 border-0'
