@@ -108,7 +108,7 @@ function Input ({
                         // isSelected: selectedItem === item,
                       })}
                     >
-                      {item.name.ca}
+                      {item.name[locale]}
                     </li>
                   ))
                 : null}
