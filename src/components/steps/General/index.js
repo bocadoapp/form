@@ -81,9 +81,6 @@ const General = () => {
       </div>
 
       <div className='flex mb-5 w-full border border-gray-300 rounded overflow-hidden py-2'>
-        <div className="w-8 text-center">
-          <i className="fas fa-stopwatch" />
-        </div>
         <Field name='cooking_time' component={CookingTime} />
       </div>      
 

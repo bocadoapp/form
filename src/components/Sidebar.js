@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 import cn from 'classnames'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { Button } from '@bocado/ui'
 
 import { useStore } from '../hooks/useStore'
 import steps from '../lib/steps'
