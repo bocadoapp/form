@@ -19,8 +19,8 @@ const StepInfo = ({ icon, name }) => {
       <span className='mr-3'>
         <i className={icon} />
       </span>
-      <div className="flex w-full justify-between">
-        <span className='hidden md:inline'>
+      <div className="hidden md:flex w-full justify-between">
+        <span>
           {name}
         </span>
       </div>
