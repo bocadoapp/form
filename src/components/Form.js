@@ -12,20 +12,12 @@ import cn from 'classnames'
  */
 
 const initialValues = {
-  user: {
-    name: '',
-    email: ''
-  },
   name: '',
-  diners: '',
-  time: '',
+  diners: 4,
   cooking_time: 3,
-  // cuisine: '',
   ingredients: [],
   passos: [],
-  pics: [],
-  videos: [],
-  picsPerStep: []
+  media: []
 }
 
 const Form = ({ children, className }) => {
@@ -44,7 +36,7 @@ const Form = ({ children, className }) => {
       validate={handleValidate}
     >
       {() => (
-        <FormikForm className={cn('w-full', className)}>
+        <FormikForm className={cn('w-full py-8', className)}>
           {children}
         </FormikForm>
       )}

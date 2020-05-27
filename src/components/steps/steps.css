@@ -1,5 +1,5 @@
 .step-general .pic {
-  @apply inline-flex rounded-full border border-gray-300 w-12 h-12 box-border overflow-hidden;
+  @apply inline-flex rounded-md border border-gray-300 w-32 h-32 box-border overflow-hidden;
 }
 
 .step-general .pic-inner {

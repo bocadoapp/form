@@ -3,9 +3,11 @@ import { useIntl } from 'react-intl'
 
 import Input from './Input'
 import { Button } from '@bocado/ui'
+import { useStore } from '../../../hooks/useStore'
 
 function Ingredient (props) {
   const { push } = props
+  const { setStatus } = useStore()
   const { formatMessage: t } = useIntl()
   const [value, setValue] = useState('')
   const [selected, setSelected] = useState(null)
@@ -25,21 +27,20 @@ function Ingredient (props) {
       : { type: 'custom', label: value, value, ...fragment }
     
     if (ingredient.label === '' || ingredient.qty === '') {
-      // TOAST NOTIFICATION validation here
-      return
+      return setStatus({ error: true, text: 'ingredient.validation.error' })
     }
 
     refs.qty.current.value = ''
     push(ingredient)
     setValue('')
     setSelected(null)
-  }, [refs.qty, refs.unit, selected, value, push])
+  }, [refs.qty, refs.unit, selected, value, push, setStatus])
 
   return (
     <div className='flex flex-col w-full'>
-      <div className="flex flex-col md:flex-row w-full my-4">
-        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4 md:mb-auto'>
-          <div className='w-32 flex items-center border-r border-gray-300'>
+      <div className="flex flex-col w-full my-4">
+        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4'>
+          <div className='w-full flex items-center border-r border-gray-300'>
             <input
               ref={refs.qty}
               type="number"
@@ -54,7 +55,9 @@ function Ingredient (props) {
               <option value="kg">kg</option>
               <option value="ml">ml</option>
             </select>
-          </div>        
+          </div>
+        </div>
+        <div className='w-full flex border border-gray-300 rounded text-gray-600 bg-white mb-4'>
           <div className='w-full flex items-center px-2'>
             <Input
               setValue={setValue}
@@ -65,7 +68,7 @@ function Ingredient (props) {
         </div>
         <Button
           type='button'
-          styled='success m-auto md:ml-4'
+          styled='success m-auto md:ml-0'
           onClick={handleClick}
           style={{ width: '6rem' }}
         >

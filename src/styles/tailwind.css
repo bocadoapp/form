@@ -36,6 +36,10 @@ input.input, button {
   @apply py-2 px-4 border border-gray-300 rounded w-full;
 }
 
+input.input.error, button.error {
+  @apply border-red-300;
+}
+
 .menu a:not(:last-child) {
   @apply mr-4;
 }

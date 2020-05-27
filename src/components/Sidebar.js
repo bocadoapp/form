@@ -2,12 +2,13 @@ import React, { useCallback } from 'react'
 import cn from 'classnames'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { Button } from '@bocado/ui'
+import { useFormikContext } from 'formik'
 
 import { useStore } from '../hooks/useStore'
 import steps from '../lib/steps'
 import { getUserFromLS } from '../lib/helpers'
 import User from './User'
+import NextStep from './NextStep'
 
 const StepInfo = ({ icon, name }) => {
   if (!icon) {
@@ -19,8 +20,8 @@ const StepInfo = ({ icon, name }) => {
       <span className='mr-3'>
         <i className={icon} />
       </span>
-      <div className="flex w-full justify-between">
-        <span className='hidden md:inline'>
+      <div className="hidden md:flex w-full justify-between">
+        <span>
           {name}
         </span>
       </div>
@@ -29,20 +30,42 @@ const StepInfo = ({ icon, name }) => {
 }
 
 const Sidebar = () => {
-  // const { values } = useFormikContext()
-  const { step, btn } = useStore()
+  const { values } = useFormikContext()
+  const { step } = useStore()
   const history = useHistory()
   const { locale, formatMessage: t } = useIntl()
   const lsUser = getUserFromLS()
-  const goToNext = useCallback(() => history.push(`/${locale}/${step + 1}`), [locale, step, history])
-  const goTo = useCallback(
-    stepParam => history.push(`/${locale}/${stepParam || (step + 1)}`),
-    [history, locale, step]
+  const goTo = useCallback(    
+    stepParam => lsUser && history.push(`/${locale}/${stepParam || (step + 1)}`),
+    [history, locale, step, lsUser]
   )
+
+  const canChange = useCallback(num => {
+    let canExit = false
+    let canEnter = false
+    
+    if (num < step) {
+      canExit = true
+      canEnter = true
+    } else {
+      canEnter = true
+      if (step === 2) {
+        canExit = !!(values.name && values.name !== '')
+      } else if (step === 3) {
+        canExit = !!(values.ingredients && values.ingredients.length)
+      } else if (step === 4) {
+        canExit = !!(values.passos && values.passos.length)
+      }
+    }
+    
+    return canExit && canEnter
+  }, [step, values])
 
   return (
     <aside className='w-full lg:max-w-xs flex md:mr-10'>
       <div className='w-full'>
+        {/* <NextStep className='md:hidden' /> */}
+
         <div className='flex w-full flex lg:flex-col'>
           {steps.map(({ name, icon, num }) => {
             const isFirstStep = num === 1
@@ -57,10 +80,10 @@ const Sidebar = () => {
                   isSameStep && 'lg:shadow-md lg:rounded-lg',
                   !isSameStep && !isFirstStep && 'cursor-pointer'
                 )}
-                onClick={() => !isFirstStep && !isSameStep && goTo(num)}
+                onClick={() => !isFirstStep && !isSameStep && canChange(num) && goTo(num)}
               >
                 {isFirstStep && lsUser
-                  ? <User name={lsUser.username || lsUser.name} />
+                  ? <User name={lsUser.name || lsUser.username} />
                   : <StepInfo icon={icon} name={t({ id: name })} />
                 }
               </div>
@@ -68,30 +91,10 @@ const Sidebar = () => {
           })}
         </div>
 
-        {step > 1 && btn && (
-          <div className='absolute bottom-0 left-0 right-0 md:relative flex flex-col md:mt-8 mb-6 md:mb-auto px-4 md:px-auto'>
-            <span className='text-xs text-gray-400 m-auto uppercase'>
-              {t({ id: 'seguent' })}
-            </span>
-            <Button
-              disabled={btn.disabled}
-              styled={btn.styled}
-              className='items-center'
-              onClick={goToNext}
-            >
-              {btn.icon && btn.icon !== '' ? <i className={cn('mr-3', btn.icon)} /> : null}
-              {t({ id: btn.label })}
-            </Button>
-            {btn.disabled && !!btn.disabledMessage && (
-              <span className='text-xs text-gray-400 m-auto'>
-                {t({ id: btn.disabledMessage })}
-              </span>
-            )}
-          </div>
-        )}
+        <NextStep className='hidden md:flex'/>
       </div>
     </aside>
   );
 };
 
-export default Sidebar;
+export default Sidebar

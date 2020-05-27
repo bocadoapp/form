@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd'
 const createMarkup = __html => ({ __html })
 const PasType = 'step'
 
-function Pas({ text, index, remove, move, id, setEditIndex }) {
+function Pas({ media, text, index, remove, move, id, setEditIndex }) {
   const { formatMessage: t } = useIntl()
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -72,6 +72,25 @@ function Pas({ text, index, remove, move, id, setEditIndex }) {
           <i className="far fa-edit cursor-pointer mr-3" onClick={() => setEditIndex(index)} />
         </div>
       </div>
+
+      {!!media.length && (
+        <div className='w-full flex'>
+          {media.map(m => (
+            <div
+              key={m.name || m.path}
+              className='inline-flex rounded-md border border-gray-300 w-20 h-20 box-border overflow-hidden mr-3 flex-shrink-0'
+            >
+              <div
+                className='flex min-w-0 w-full relative justify-center items-center'
+                style={{
+                  backgroundImage: `url(${m.url})`,
+                  backgroundSize: 'cover'
+                }} />
+            </div>
+          ))}
+        </div>
+      )}
+
       <p dangerouslySetInnerHTML={createMarkup(text.replace(/\r?\n/g, '<br />'))} />
     </div>
   )
